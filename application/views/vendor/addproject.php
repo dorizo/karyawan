@@ -1,3 +1,7 @@
+<?php if($this->session->userdata("akses") != "PM"){ ?>
+  <div class="alert alert-danger">ANDA TIDAK MEMPUNYAI AKSES UNTUK INPUT PROJECT</div>
+<?php }else{?>
+
 
             <div class="card card-primary col-12">
               <div class="card-header">
@@ -67,3 +71,4 @@
                 </div>
               </form>
             </div>
+<?php } ?>
