@@ -37,6 +37,7 @@ class Login extends CI_Controller {
                 'karyawanNama'  => $createsession->karyawanNama,
                 'karyawanNip'  => $createsession->karyawanNip,
                 'username'  => $createsession->username,
+                'akses'  => $createsession->akses,
                 'logged_in' => TRUE
             );
             $this->session->set_userdata($a);
