@@ -25,9 +25,16 @@ class Home extends CI_Controller {
 		$this->load->view('home', $data);
 		$this->load->view('template/footer');
 	}
+	public function addabsen()
+	{
+		$this->db->insert("absen" , $this->input->post());
+		redirect('home/add', 'refresh');
+
+	}
 	public function add(){
 		
-		$data["titlepage"] = "Tambah Project";
+		$data["titlepage"] = "FITURE LAINNYA";
+		$data["absen"] = $this->db->from("absen")->where("DATE_FORMAT(create_at , '%Y-%m-%d')=" , date("Y-m-d"))->get()->num_rows();
 		
         $data["vendorresult"] = $this->vendor_model->view();
 		
