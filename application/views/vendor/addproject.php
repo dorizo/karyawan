@@ -1,9 +1,9 @@
 
 
 <div class="card card-primary col-12">
+                <?php if($absen < 2){?>
               <div class="card-header">
-                <h3 class="card-title">FORM</h3>
-                <?=$absen?>
+                <h3 class="card-title">FORM ABSENSI</h3>
               </div>
               <div class="card-body">
               <form method="post" action="<?=base_url("home/addabsen")?>">
@@ -18,6 +18,9 @@
                   </div>
               </form>
               </div>
+              <?php }else{
+                echo "<h1>HARI INI ANDA SUDAH ABSENSI</h1>";
+              } ?>
               <hr />
 <?php if($this->session->userdata("akses") != "PM"){ ?>
   <div class="alert alert-danger">ANDA TIDAK MEMPUNYAI AKSES UNTUK INPUT PROJECT</div>

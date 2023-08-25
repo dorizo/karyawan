@@ -34,7 +34,7 @@ class Home extends CI_Controller {
 	public function add(){
 		
 		$data["titlepage"] = "FITURE LAINNYA";
-		$data["absen"] = $this->db->from("absen")->where("DATE_FORMAT(create_at , '%Y-%m-%d')=" , date("Y-m-d"))->get()->num_rows();
+		$data["absen"] = $this->db->from("absen")->where("mappingCode" , $this->session->userdata("karyawanCode"))->where("DATE_FORMAT(create_at , '%Y-%m-%d')=" , date("Y-m-d"))->get()->num_rows();
 		
         $data["vendorresult"] = $this->vendor_model->view();
 		
