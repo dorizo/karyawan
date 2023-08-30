@@ -33,7 +33,7 @@
                 <?php   
                     }else{
 
-                        echo "PROSES BERADA DI KEUANGAN JIKA PROSES LAMA MOHON DI PERCEPAT"; 
+                        echo "PROSES BERADA DI KEUANGAN"; 
                     } 
                 }elseif($datastatus->job_day > 11){ 
                     echo "Proses Berada Di adminstrasi"; 
