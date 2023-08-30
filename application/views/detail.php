@@ -24,7 +24,18 @@
     <div class="alert alert-success">
                 Step Anda Sekarang Berada di <b><?php print_r($datastatus->job_name)?></b> <br /> <br />
                 <?php 
-                if($datastatus->job_day > 11){ 
+                if($datastatus->job_day == 2){ 
+                    if($this->session->userdata("akses") == "KEUANGAN"){
+                     
+                    ?>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Rubah ke Step  <?=$datastatusnext->job_name?></button>  
+                <?php   
+                    }else{
+
+                        echo "PROSES BERADA DI KEUANGAN JIKA PROSES LAMA MOHON DI PERCEPAT"; 
+                    } 
+                }elseif($datastatus->job_day > 11){ 
                     echo "Proses Berada Di adminstrasi"; 
                 }else{
                     ?>
