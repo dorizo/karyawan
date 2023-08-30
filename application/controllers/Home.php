@@ -27,8 +27,30 @@ class Home extends CI_Controller {
 	}
 	public function addabsen()
 	{
-		$this->db->insert("absen" , $this->input->post());
+		$date = str_replace( ':', '', date('Y-m-d'));
+		if (!is_dir('uploads/absen/'.$date)) {
+			mkdir('./uploads/absen/' . $date, 0777, TRUE);
+		
+		}
+		$config['upload_path']          = './uploads/absen/'.$date;
+		$config['allowed_types']        = 'gif|jpg|png';
+		$config["encrypt_name"] = true;
+
+		$this->load->library('upload', $config);
+
+		if ( ! $this->upload->do_upload('image'))
+		{	
+			redirect('home/add', 'refresh');
+		}
+		else
+		{
+			$po = $this->input->post();
+			$data = $this->upload->data();
+			$po["image"] =  $date."/".$data["file_name"];
+		$this->db->insert("absen" ,$po );
 		redirect('home/add', 'refresh');
+
+		}
 
 	}
 	public function add(){

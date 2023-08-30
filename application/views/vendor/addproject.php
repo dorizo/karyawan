@@ -6,7 +6,7 @@
                 <h3 class="card-title">FORM ABSENSI</h3>
               </div>
               <div class="card-body">
-              <form method="post" action="<?=base_url("home/addabsen")?>">
+              <form method="POST" enctype="multipart/form-data" action="<?=base_url("home/addabsen")?>">
                   <div class="form-group">
                     <input type="hidden" name="mappingCode" class="form-control" value="<?=$this->session->userdata("karyawanCode")?>">
                     <input type="file" name="image"  accept="image/*;capture=camera">
