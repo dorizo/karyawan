@@ -10,9 +10,7 @@ class Projectrequest extends CI_Controller {
 			$this->load->model('project_model');
 			$this->load->model('vendor_model');
 			$this->load->model('witel_model');
-			if(!$this->session->userdata("karyawanNip")){
-				redirect('/login', 'refresh');
-			}
+			
 			
 	}
 
