@@ -51,8 +51,8 @@ class Statusproject extends CI_Controller {
 		
 		}
 		$config['upload_path']          = './uploads/'.$date;
-		$config['allowed_types']        = 'gif|jpg|png';
-		$config["encrypt_name"] = true;
+		// $config['allowed_types']        = 'gif|jpg|png';
+		// $config["encrypt_name"] = true;
 
 		$this->load->library('upload', $config);
 
