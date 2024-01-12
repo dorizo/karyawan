@@ -12,12 +12,61 @@
             Detail Data <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)
             <?php echo $error;?>
             <input type="hidden" class="form-control" name="project_id" value="<?=$dataresult->project_id?>" /><hr />
+            <label>PROJECT STATUS</label>
             <input type="text" class="form-control" name="project_status" value="<?=$dataresult->project_status?>" /><hr />
+            <label>KETERANGAN EVIDENT</label>
+            <input type="text" class="form-control" name="ket_upload"  /><hr />
+           
             <input type="file" class="form-control" name="filedata" /><hr />
-            <input type="submit" value="Upload" class="btn btn-success" />
+            
+            <button class="btn btn-primary mx-3" id="btnFetch" type="submit"  onclick="javascript=this.disabled = true; form.submit();">
+            <i class="fas fa-spinner fa-spin" style="display:none;"></i>
+            <span class="btn-text">Upload</span>
+            </button>
             </form>
         </div>
     </div>
+    <?php
+    if($dataresult->project_status=="SURVEY & SITAC"){ 
+        $q = $this->db->query("select * from project_sitax where project_id=".$dataresult->project_id)->row();
+        print_r($q);
+        ?>
+    <div class="card">
+            <div class="card-body table-responsive">
+                <hr />
+                INPUT SURVEY DAN SITAC <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)<br/>
+                <small>survey dan sitac di input jika ada sitac jika tidak tidak perlu di input </small>
+                <form action="<?=base_url("statusproject/addsitac")?>"  method="POST" enctype="multipart/form-data">
+         
+                    <hr />
+                    Detail Data <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)
+                    <?php echo $error;?>
+                    <input type="hidden" class="form-control" name="sitax_id" value="<?=$q?$q->sitax_id:""?>" /><hr />
+                    
+                    <input type="hidden" class="form-control" name="project_id" value="<?=$dataresult->project_id?>" /><hr />
+                    Sitac Desc
+                    <input type="text" class="form-control " name="sitax_list"  value="<?=$q?$q->sitax_list:""?>" /><hr />
+                    Sitac pembayaran
+                    <input type="text" class="form-control number-separator" name="sitax_total" value="<?=$q?$q->sitax_total:""?>" /><hr />
+                    Sitac Penagihan
+                    <input type="text" class="form-control number-separator" name="sitax_penagihan" value="<?=$q?$q->sitax_penagihan:""?>" /><hr />
+                    
+                    <button class="btn btn-primary mx-3" id="btnFetch" type="submit"  onclick="javascript=this.disabled = true; form.submit();">
+                    <i class="fas fa-spinner fa-spin" style="display:none;"></i>
+                    <span class="btn-text">Request</span>
+                    </button>
+                    </form>
+                
+                </form>
+            </div>
+    </div>
+    
+
+    
+    <?php
+    }
+    ?>
+
     <?php
     if($datastatusnext){
     ?>
@@ -103,8 +152,9 @@
 				<li>
 					<a href="#" class="float-right"><?=$value->log_date?></a>
 					<div class="col-12" width="100%">
-                        <?=$value->project_status?>
-                        <a target="_blank" href="<?=base_url("uploads/".$value->filedata)?>" >download</a> 
+                        <div class="col-4"><?=$value->project_status?></div><hr />
+                        <div class="col-4"><?=$value->ket_upload?></div>
+                        <div class="col-4"><a target="_blank" href="<?=base_url("uploads/".$value->filedata)?>" >download</a> </div>
                     </div>
 				</li>
                 <?php
@@ -148,3 +198,16 @@ ul.timeline > li:before {
     z-index: 400;
 }
     </style>
+
+
+<script>
+
+    $(document).ready(function() {
+    $("#btnFetch").click(function() {
+      $(this).html(
+        `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+      );
+      
+    });
+});
+</script>

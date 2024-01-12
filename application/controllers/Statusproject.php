@@ -30,6 +30,23 @@ class Statusproject extends CI_Controller {
 		$this->load->view('template/footer');
 	}
 
+	public function addsitac(){
+		$p = $this->input->post();
+		$p["sitax_total"] = str_replace(",", "",$this->input->post("sitax_total"));
+		$p["sitax_penagihan"] = str_replace(",", "", $this->input->post("sitax_penagihan"));
+		if($this->input->post("sitax_id")){
+			$this->db->where("sitax_id" , $this->input->post("sitax_id"));
+			$this->db->update("project_sitax" , $p);
+		
+		}else{
+			$this->db->insert("project_sitax" , $p);
+		
+		}
+		
+		redirect('/statusproject/detail/'.$this->input->post("project_id"), 'refresh');
+
+	}
+
 	public function submitprogress(){
 			$data["div"] = "alert-success";
 			$data["titlepage"] = "Berhasil Di input";

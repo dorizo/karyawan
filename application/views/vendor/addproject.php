@@ -14,7 +14,7 @@
                   </div>
                   <div class="form-group">
 
-                  <button type="submit" class="btn btn-primary"><?=$absen >= 1?"CHECK OUT":"CHECK IN";?></button>
+                  <button type="submit"  id="btnFetch"  class="btn btn-primary"  onclick="javascript=this.disabled = true; form.submit();"><?=$absen >= 1?"CHECK OUT":"CHECK IN";?></button>
                   </div>
               </form>
               </div>
@@ -92,3 +92,17 @@
               </form>
 <?php } ?>
             </div>
+
+            
+
+<script>
+
+$(document).ready(function() {
+$("#btnFetch").click(function() {
+  $(this).html(
+    `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...`
+  );
+  
+});
+});
+</script>

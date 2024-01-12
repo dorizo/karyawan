@@ -28,7 +28,7 @@
                     <td>
                     <div class="card card-primary card-outline">
                       <div class="card-body box-profile">
-                        <b><?=$value["project_code"]?></b><hr />
+                        <b><?=$value["project_code"]?> (<?=$value["project_name"]?>)</b><hr />
                         KATEGORI <?=$value["cat_name"]?><hr />
                         Status <?=$value["project_status"]?><hr />
                         Estimasi Mulai : <?=tanggalindo($value["project_start"])?><hr />
