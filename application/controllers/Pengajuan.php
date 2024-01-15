@@ -10,7 +10,7 @@ class Pengajuan extends CI_Controller {
 			$this->load->model('akunbank_pengajuan_model');
 			$this->load->model('akunbank_model');
 			
-			if(!$this->session->userdata("userCode")){
+			if(!$this->session->userdata("karyawanNip")){
 				redirect('/login', 'refresh');
 			}
 	}
