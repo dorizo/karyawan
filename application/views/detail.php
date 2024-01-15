@@ -85,12 +85,13 @@
                         echo "PROSES BERADA DI KEUANGAN"; 
                     } 
                 }elseif($datastatus->job_day > 11){ 
-                    echo "Proses Berada Di adminstrasi"; 
-                }else{
+                    if($this->session->userdata("akses") == "admin"){
+                     
+               
                     ?>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Rubah ke Step  <?=$datastatusnext->job_name?></button>
-                <?php } ?>
+                <?php  }else{ echo "Proses Berada Di adminstrasi";} } ?>
             </div>
      <?php }else{?>
         <div class="alert alert-success">
