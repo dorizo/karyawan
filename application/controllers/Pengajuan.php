@@ -104,7 +104,7 @@ class Pengajuan extends CI_Controller {
 				echo "<script>alert('pengajuan berhasil di input')</script>";
 				$this->akunbank_pengajuan_model->submitadd($this->upload->data("file_name"));
 				if($this->input->post("statusPengajuan")=="project"){
-				redirect('/Pengajuan/setting/'.$id, 'refresh');
+				redirect('/statusproject/detail/'.$id, 'refresh');
 			
 				}else{
 
