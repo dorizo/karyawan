@@ -67,7 +67,10 @@
     }
     ?>
 
+
+
     <?php
+    if($this->session->userdata("akses") != "waspang"){
     if($datastatusnext){
     ?>
     <div class="alert alert-success">
@@ -84,7 +87,7 @@
 
                         echo "PROSES BERADA DI KEUANGAN"; 
                     } 
-                }elseif($datastatus->job_day > 11){ 
+                }elseif($datastatus->job_day > 12){ 
                     if($this->session->userdata("akses") == "admin"){
                      
                
@@ -97,7 +100,68 @@
         <div class="alert alert-success">
                 Step sudah <b><?php print_r($datastatus->job_name)?></b> <br /> <br />
             </div>
-    <?php } ?>
+    <?php } }
+    
+    if($this->session->userdata("akses") == "PM"){
+       
+    ?>
+    <div class="card">
+        <div class="card-header"> List Pengajuan <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)</div>
+        <div class="card-body">
+        <?php
+             $dataxx = $this->Akunbank_pengajuan_model->view($id);
+                ?>
+                    <a class="btn btn-danger" href="<?=base_url("pengajuan/add/".$dataresult->project_id)?>">Tambah</a>
+            
+        <div class="timeline">
+  <!-- Timeline time label -->
+  <?php
+                    foreach ($dataxx as $key => $value) { 
+                    ?>
+                   
+                 
+  <div>
+            <!-- Before each timeline item corresponds to one icon on the left scale -->
+                <i class="fas fa-envelope bg-blue"></i>
+                <!-- Timeline item -->
+                <div class="timeline-item">
+                <!-- Time -->
+                <span class="time"><i class="fas fa-clock"></i> <?=$value["transaksiDate"]?></span>
+                <!-- Header. Optional -->
+                <h3 class="timeline-header"></h3>
+                <!-- Body -->
+                <div class="timeline-body">
+                     <?=$value["transaksiNote"]?>
+                    <hr />
+                    Nilai Material : <?=rupiah($value["nilai_material"])?><hr />
+                    Nilai Jasa : <?=rupiah($value["nilai_jasa"])?><hr />
+                    Total Pengajuan : <?=rupiah($value["transaksiJumlah"])?><hr />
+                    Total Pengajuan : <?=$value["statusTransaksi"]?><hr />
+                    <a target="_BLANK" href="<?='https://keuangan.ciptateknologimuda.com/pembayaran/'.$value['upload_file']?>"> <i class="fa fa-download"></i></a>
+                  
+                   
+                </div>
+                <!-- Placement of additional controls. Optional -->
+                <div class="timeline-footer">
+                    <a onclick="hapus('<?=base_url('pengajuan/delete/'.$value['akunbank_pengajuanCode'])?>')" class="btn btn-danger btn-sm">Hapus</a>
+                </div>
+                </div>
+            </div>
+            <?php
+                     }
+                  ?>
+            </div>
+           
+              
+                  
+
+                
+        </div>
+    </div>
+
+    <?php
+    }
+    ?>
 
         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -127,6 +191,28 @@
             </div>
     
 <div class="">
+    <?php
+$qq = $this->db->query("select * from project_sitax where project_id=".$dataresult->project_id)->result();
+
+foreach ($qq as $key => $value) {
+?>
+<h4>NILAI SITAC</h4>
+<table class="table">
+    <th>Ket</th><th>Nilai Pembayaran</th><th>Nilai Penagihan</th></tr>
+    <tr>
+        <td><?=$value->sitax_list?></td>
+        <td><?=rupiah($value->sitax_total);?></td>
+        <td><?=rupiah($value->sitax_penagihan);?></td>
+    </tr>
+
+</table>
+<a class="btn btn-success form-control">Pengajuan keuangan</a>
+<hr />
+
+<?php
+}
+ 
+?>
 	<div class="row">
 		<div class="col-6">
 			<h4>LOG LIST</h4>

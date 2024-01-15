@@ -8,6 +8,7 @@ class Statusproject extends CI_Controller {
 	{
 			parent::__construct();
 			$this->load->model('project_model');
+			$this->load->model('Akunbank_pengajuan_model');
 			$this->load->model('vendor_model');
 			$this->load->model('witel_model');
 			if(!$this->session->userdata("karyawanNip")){
@@ -20,6 +21,7 @@ class Statusproject extends CI_Controller {
 	{
 		$data["titlepage"] = "Detail Project";
 		$data["error"] = "";
+		$data["id"]= $id;
 		$data["dataresult"] = $this->project_model->viewSinggle($id);
 		$data["log_project"] = $this->db->from("log_project")->where("project_id" , $id)->order_by("log_date","desc")->get()->result();
 		$data["upload_list"] = $this->db->from("karyawan_upload")->where("project_id" , $id)->order_by("log_date","desc")->get()->result();
