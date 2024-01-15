@@ -111,7 +111,9 @@
         <?php
              $dataxx = $this->Akunbank_pengajuan_model->view($id);
                 ?>
-                    <a class="btn btn-danger" href="<?=base_url("pengajuan/add/".$dataresult->project_id)?>">Tambah</a>
+                    <a class="btn btn-danger" href="<?=base_url("pengajuan/add/".$dataresult->project_id)?>">Tambah Pengajuan </a>
+                    <small>fungsi ini untuk pengajuan ke keuangan </small>
+                    <hr />
             
         <div class="timeline">
   <!-- Timeline time label -->
