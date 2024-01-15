@@ -83,7 +83,7 @@ class Pengajuan extends CI_Controller {
 		
 		}else{
 
-			$config['upload_path']          = '../keuangan/github/pembayaran/';
+			$config['upload_path']          = '../../keuangan/github/pembayaran/';
 			$config['allowed_types']        = '*';
 			$config['max_size']             = 100000;
 			$config['max_width']            = 102400;
