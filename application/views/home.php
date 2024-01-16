@@ -40,6 +40,7 @@
                        Pembayaran Vendor :  <?=rupiah($value["paymentvendor"]);?> -->
                        <hr />
                        <a class="btn btn-success" href="<?=base_url("statusproject/detail/".$value['project_id'])?>">Input Status</a>
+                       <a class="btn btn-success" href="<?=base_url("mandor/sematkan/".$value['project_id'])?>">Set Waspang</a>
                       
                       </div>
                     </div>

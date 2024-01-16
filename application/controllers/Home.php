@@ -20,10 +20,24 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$data["titlepage"] = "HOME";
-		$data["dataresult"] = $this->project_model->view();
+		if($this->session->userdata("akses") == "PM"){
+			$array = array();
+			$witel = $this->witel_model->role_witel($this->session->userdata("userCodex"));
+			foreach ($witel as $key => $value) {
+				# code...
+				$array[] = $value->witelCode;
+			}
+			
+			$data["dataresult"] = $this->project_model->viewn($array);
+		}else{
+
+			$data["dataresult"] = $this->project_model->view();
+		}
+		
 		$this->load->view('template/header' , $data);
 		$this->load->view('home', $data);
 		$this->load->view('template/footer');
+
 	}
 	public function addabsen()
 	{
