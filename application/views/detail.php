@@ -67,8 +67,6 @@
     }
     ?>
 
-
-
     <?php
     if($this->session->userdata("akses") != "waspang"){
     if($datastatusnext){
@@ -109,7 +107,20 @@
 
             </div>
     <?php } }
-    
+    ?>
+
+<!-- designator mulai -->
+    <div class="card">
+        <div class="card-header"> Designator <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)</div>
+        <div class="card-body">
+        <a class="btn btn-danger" href="<?=base_url("designator/add/".$dataresult->project_id)?>">Tambah Designator </a><br />
+                    <small>Designator fungsi  </small>
+                    <hr />
+        </div>
+     </div>
+
+<!-- designator selesai -->
+    <?php
     if($this->session->userdata("akses") == "PM"){
        
     ?>
@@ -329,4 +340,5 @@ function hapus($a){
         }
     })
 }
+      
 </script>
