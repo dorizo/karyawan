@@ -6,6 +6,13 @@
                 </div>
               </div>
               <div class="card-body table-responsive p-0">
+                  <form class="form p-2">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">COST CENTER</label>
+                    <input type="text" name="cari" value="<?=$this->input->get("cari")?>" class="form-control" aria-describedby="emailHelp" placeholder="INPUTKAN COST CENTER DISINI">
+                  </div>
+                    <input type="submit" value="cari" class="btn btn-primary">
+                  </form>
                 <table class="table table-striped table-valign-middle">
                   <thead>
                   <tr>
