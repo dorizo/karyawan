@@ -52,6 +52,13 @@ class Designator extends CI_Controller {
 		echo json_encode($s);
 
 	}
+	public function hapus($id, $x){
+		$this->db->where("id_project_khs_v2_detail" , $id);
+			$this->db->limit(1);
+			$this->db->delete("datateknis_projectkhs_detail");
+			redirect(base_url("designator/add/".$x), 'refresh');
+	
+	}
 
 
 }

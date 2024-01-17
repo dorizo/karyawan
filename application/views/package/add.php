@@ -69,8 +69,8 @@
                 <li class="list-group-item"> <b>JUMLAH TOTAL  </b><?=rupiah($value["total_designator"])?></li>
               </ul>
               <div class="card-body">
-                <a href="#" class="card-link">Edit</a>
-                <a href="#" class="card-link">Hapus</a>
+                <!-- <a href="#" class="card-link">Edit</a> -->
+                <a href="<?=base_url("designator/hapus/").$value["id_project_khs_v2_detail"]."/".$value["project_id"]?>" class="card-link">Hapus</a>
               </div>
             </div>
              <?php
