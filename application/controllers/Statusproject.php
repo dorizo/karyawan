@@ -22,6 +22,8 @@ class Statusproject extends CI_Controller {
 		$data["titlepage"] = "Detail Project";
 		$data["error"] = "";
 		$data["id"]= $id;
+		
+        $data["designatorlist"] = $this->db->query("select * from datateknis_projectkhs_detail where project_id=".$id)->result_array();
 		$data["dataresult"] = $this->project_model->viewSinggle($id);
 		$data["log_project"] = $this->db->from("log_project")->where("project_id" , $id)->order_by("log_date","desc")->get()->result();
 		$data["upload_list"] = $this->db->from("karyawan_upload")->where("project_id" , $id)->order_by("log_date","desc")->get()->result();

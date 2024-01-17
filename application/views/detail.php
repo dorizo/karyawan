@@ -113,9 +113,29 @@
     <div class="card">
         <div class="card-header"> Designator <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)</div>
         <div class="card-body">
+            
+        <?php if($this->session->userdata("akses") == "PM"){ ?>
         <a class="btn btn-danger" href="<?=base_url("designator/add/".$dataresult->project_id)?>">Tambah Designator </a><br />
                     <small>Designator fungsi  </small>
+                    <?php } ?>
                     <hr />
+                    <?php
+            foreach ($designatorlist as $key => $value) { ?>
+            <div class="card">
+               <div class="card-body">
+                <h5 class="card-title"><?=$value["designator_code"]?></h5>
+                <p class="card-text"><?=$value["designator_desc"]?></p>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"> <b>JUMLAH DESIGNATOR = </b> <?=$value["jumlah_designator"]?> <?=$value["satuan"]?></li>
+              </ul>
+              <div class="card-body">
+                <!-- <a href="#" class="card-link">Edit</a> -->
+              </div>
+            </div>
+             <?php
+            }
+            ?>
         </div>
      </div>
 
@@ -130,8 +150,10 @@
         <?php
              $dataxx = $this->Akunbank_pengajuan_model->view($id);
                 ?>
-                    <a class="btn btn-danger" href="<?=base_url("pengajuan/add/".$dataresult->project_id)?>">Tambah Pengajuan </a>
-                    <small>fungsi ini untuk pengajuan ke keuangan </small>
+                    <?php if($this->session->userdata("akses") == "PM"){ ?>
+                        <a class="btn btn-danger" href="<?=base_url("pengajuan/add/".$dataresult->project_id)?>">Tambah Pengajuan </a>
+                    <?php } ?>
+                        <small>fungsi ini untuk pengajuan ke keuangan </small>
                     <hr />
             
         <div class="timeline">
