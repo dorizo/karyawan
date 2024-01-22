@@ -17,12 +17,14 @@ class Statusproject extends CI_Controller {
 			
 	}
 
-	public function detail($id)
+	public function detail($id , $m =0)
 	{
+
+
 		$data["titlepage"] = "Detail Project";
 		$data["error"] = "";
 		$data["id"]= $id;
-		
+		 $data["designatorconfig"] = $this->db->query("select * from datateknis_projectkhs_detail where id_project_khs_v2_detail=".$m)->result_array();
         $data["designatorlist"] = $this->db->query("select * from datateknis_projectkhs_detail where project_id=".$id)->result_array();
 		$data["dataresult"] = $this->project_model->viewSinggle($id);
 		$data["log_project"] = $this->db->from("log_project")->where("project_id" , $id)->order_by("log_date","desc")->get()->result();

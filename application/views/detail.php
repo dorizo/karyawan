@@ -1,7 +1,8 @@
 <div class="col-lg-12">
     <div class="card">
         <div class="card-header border-0">
-            <h3 class="card-title">Project Detail </h3>
+            <h3 class="card-title">Project Detail </h3><br />
+            <small>upload ini di gunakan untuk evident tanpa designator</small>
             <div class="card-tools">
             </div>
         </div>
@@ -11,6 +12,18 @@
             <hr />
             Detail Data <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)
             <?php echo $error;?>
+            <?php
+            foreach ($designatorconfig as $key => $value) {
+                 ?>
+                # code...
+                <div class="alert alert-primary">
+                    ANDA BERADA DI FORM UPLOAD UNTUK DESIGNATOR : <?php print_r($value["designator_code"])?> / <?=$value["designator_desc"]?>
+                    <input type="hidden" class="form-control" name="id_project_khs_v2_detail" value="<?=$value["id_project_khs_v2_detail"]?>" /><hr />
+                 </div>
+                <hr />
+            <?php
+            }
+            ?>
             <input type="hidden" class="form-control" name="project_id" value="<?=$dataresult->project_id?>" /><hr />
             <label>PROJECT STATUS</label>
             <input type="text" class="form-control" name="project_status" value="<?=$dataresult->project_status?>" /><hr />
@@ -130,7 +143,7 @@
                 <li class="list-group-item"> <b>JUMLAH DESIGNATOR = </b> <?=$value["jumlah_designator"]?> <?=$value["satuan"]?></li>
               </ul>
               <div class="card-body">
-                <!-- <a href="#" class="card-link">Edit</a> -->
+                <a href="<?=base_url("statusproject/detail/".$id."/".$value["id_project_khs_v2_detail"])?>" class="card-link btn btn-primary">Upload evident</a>
               </div>
             </div>
              <?php
