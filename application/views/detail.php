@@ -264,7 +264,7 @@ foreach ($qq as $key => $value) {
     </tr>
 
 </table>
-<a class="btn btn-success form-control" href="<?=base_url("pengajuan/sitax/".$value->sitax_id."/".$dataresult->project_id)?>">Pengajuan keuangan</a>
+<a class="btn btn-success form-control" href="<?=base_url("pengajuan/sitax/".$dataresult->project_id."/".$value->sitax_id)?>">Pengajuan keuangan</a>
 <hr />
 
 <?php
