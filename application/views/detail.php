@@ -42,7 +42,7 @@
     <?php
     if($dataresult->project_status=="SURVEY & SITAC"){ 
         $q = $this->db->query("select * from project_sitax where project_id=".$dataresult->project_id)->row();
-        print_r($q);
+       
         ?>
     <div class="card">
             <div class="card-body table-responsive">
@@ -127,7 +127,7 @@
         <div class="card-header"> Designator <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)</div>
         <div class="card-body">
             
-        <?php if($this->session->userdata("akses") == "PM"){ ?>
+        <?php if($this->session->userdata("akses") == "PM" or $this->session->userdata("akses") == "waspang"){ ?>
         <a class="btn btn-danger" href="<?=base_url("designator/add/".$dataresult->project_id)?>">Tambah Designator </a><br />
                     <small>Designator fungsi  </small>
                     <?php } ?>
@@ -249,7 +249,7 @@
             </div>
     
 <div class="">
-    <?php
+    <?php if($this->session->userdata("akses") == "PM"){ 
 $qq = $this->db->query("select * from project_sitax where project_id=".$dataresult->project_id)->result();
 
 foreach ($qq as $key => $value) {
@@ -264,11 +264,12 @@ foreach ($qq as $key => $value) {
     </tr>
 
 </table>
-<a class="btn btn-success form-control">Pengajuan keuangan</a>
+<a class="btn btn-success form-control" href="<?=base_url("pengajuan/sitax/".$value->sitax_id."/".$dataresult->project_id)?>">Pengajuan keuangan</a>
 <hr />
 
 <?php
 }
+    }
  
 ?>
 	<div class="row">

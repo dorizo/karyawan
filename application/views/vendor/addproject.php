@@ -31,10 +31,20 @@
               <!-- form start -->
               <form method="post">
                 <div class="card-body">
-                  <div class="form-group">
-                    <label for="exampleInputEmail1">Project Code</label>
-                    <input type="hidden" name="vendorCode" class="form-control" value="<?=$this->session->userdata("karyawanCode")?>">
-                    <input type="text" name="project_code" class="form-control">
+                <div class="form-group">
+                    <label>Vendor</label>
+                    <select name="vendorCode" class="custom-select">
+                        <option value="Pilih Vendor">Pilih Vendor</option>
+                        <?php
+                        foreach ($vendorresult as $key => $value) {
+                            # code...
+                            $noted = $value['vendorCode'] == $dataresult->vendorCode ? ' selected="selected"' : '';
+                            echo "<option value=\"".$value['vendorCode']."\" ".$noted.">".$value['vendorName']."</option>";
+                        }
+                        ?>
+                
+                    </select>
+                    
                   </div>
                   <div class="form-group">
                     <label for="exampleInputEmail1">Project Name</label>
@@ -67,8 +77,7 @@
                               <?php
                               foreach ($witelresult as $key => $value) {
                                   # code...
-                                  $noted = $value['witel_id'] == $dataresult->witel_id ? ' selected="selected"' : '';
-                                  echo "<option value=\"".$value['witel_id']."\" ".$noted.">".$value['witel_name']."</option>";
+                                  echo "<option value=\"".$value['witel_id']."\" >".$value['witel_name']."</option>";
                               }
                               ?>
                       

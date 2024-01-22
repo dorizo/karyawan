@@ -20,7 +20,7 @@ class Home extends CI_Controller {
 	public function index()
 	{
 		$data["titlepage"] = "HOME";
-		if($this->session->userdata("akses") == "PM"){
+		if($this->session->userdata("akses") == "PM" or $this->session->userdata("akses") == "OWNER"){
 			$array = array();
 			$witel = $this->witel_model->role_witel($this->session->userdata("userCodex"));
 			foreach ($witel as $key => $value) {

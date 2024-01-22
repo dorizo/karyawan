@@ -8,8 +8,12 @@
               <div class="card-body table-responsive p-0">
                   <form class="form p-2">
                   <div class="form-group">
-                    <label for="exampleInputEmail1">COST CENTER</label>
+                    <label for="exampleInputEmail1">CODE CENTER</label>
                     <input type="text" name="cari" value="<?=$this->input->get("cari")?>" class="form-control" aria-describedby="emailHelp" placeholder="INPUTKAN COST CENTER DISINI">
+                    
+        <?php if($this->session->userdata("akses") == "OWNER"){ ?>
+          <input type="checkbox" <?=$this->input->get("project_status")?"checked":""?> name="project_status" value="pending"> Pending
+          <?php } ?>
                   </div>
                     <input type="submit" value="cari" class="btn btn-primary">
                   </form>
@@ -38,13 +42,17 @@
                         <b><?=$value["project_code"]?> (<?=$value["project_name"]?>)</b><hr />
                         KATEGORI <?=$value["cat_name"]?><hr />
                         Status <?=$value["project_status"]?><hr />
-                        Estimasi Mulai : <?=tanggalindo($value["project_start"])?><hr />
+                        <!-- Estimasi Mulai : <?=tanggalindo($value["project_start"])?><hr /> -->
                         Estimasi Selesai : <?=tanggalindo($value["project_done"])?><hr />
                         Estimasi Hari : <?=$value["project_paid"]?"Project Selesai":round($datediff / (60 * 60 * 24))." hari";?> <hr />
                        
-                       <!-- Nilai Project : <?=rupiah($value["nilai_project"])?><br />
+        <?php if($this->session->userdata("akses") == "OWNER"){ ?>
+                        Nilai Project : <?=rupiah($value["nilai_project"])?><br />
                        Bunga Berjalan : <?=rupiah($value["totalbungaseluruh"]);?> <br />
-                       Pembayaran Vendor :  <?=rupiah($value["paymentvendor"]);?> -->
+                       Pembayaran Vendor :  <?=rupiah($value["paymentvendor"]);?><hr />
+                       <a class="btn btn-success" href="<?=base_url("project/approve/".$value['project_id'])?>">APPROVE PROJECT</a>
+                      
+                       <?php } ?>
                        <hr />
                        <a class="btn btn-success" href="<?=base_url("statusproject/detail/".$value['project_id'])?>">Input Status</a>
                        <a class="btn btn-success" href="<?=base_url("mandor/sematkan/".$value['project_id'])?>">Set Waspang</a>

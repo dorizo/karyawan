@@ -26,7 +26,6 @@ class Pengajuan extends CI_Controller {
 	}
 
 	public function notivsp(){
-		
 		$data["titlepage"] = "NOTIFIKASI";
 		$data["datatable"] = $this->akunbank_pengajuan_model->pengajuannotivsp("PENDING");
 		$data["pluginjs"] = "project.js?2s2";
@@ -34,7 +33,55 @@ class Pengajuan extends CI_Controller {
 		$this->load->view('Pengajuan/notivsp' , $data);
 		$this->load->view('template/footer');
 	}
+	public function sitax($id , $kodesitax, $pengajuan="project")
+	{
+		
+		$this->form_validation->set_rules('project_id', 'project_id', 'required');
+		$data["titlepage"] = "PENGAJUAN SITAC ";
+		$data["project_id"] = $id;
+		$data["pengajuanproses"] = $pengajuan;
+		$data["akunbank"] = $this->akunbank_model->view();
+		$data["pengajuanstatus"] = $this->akunbank_pengajuan_model->pengajuanstatus($pengajuan);
+	//   print_r($data["akunbank"]);
+	   if ($this->form_validation->run() === FALSE)
+        {
+     	$this->load->view('template/header' , $data);
+		$this->load->view('Pengajuan/addsitac' , $data);
+		$this->load->view('template/footer');
+		
+		}else{
 
+			$config['upload_path']          = '../../keuangan/github/pembayaran/';
+			$config['allowed_types']        = '*';
+			$config['max_size']             = 100000;
+			$config['max_width']            = 102400;
+			$config['max_height']           = 76800;
+			$config['encrypt_name']           = TRUE;
+
+			$this->load->library('upload', $config);
+
+			if ( ! $this->upload->do_upload('file'))
+			{
+				$error = array('error' => $this->upload->display_errors());
+				print_r($error);
+				$this->load->view('template/header' , $data);
+				$this->load->view('Pengajuan/addsitac' , $data);
+				$this->load->view('template/footer');
+			}else{
+				// print_r();		
+				echo "<script>alert('pengajuan berhasil di input')</script>";
+				$this->akunbank_pengajuan_model->submitadd($this->upload->data("file_name"));
+				if($this->input->post("statusPengajuan")=="project"){
+				redirect('/statusproject/detail/'.$id, 'refresh');
+			
+				}else{
+
+					redirect("/suratpesanan", 'refresh');   
+				}	
+			}
+		}
+
+	}
 	public function setting($a)
 	{
 		$data["dataresult"] = $this->project_model->viewSinggle($a);

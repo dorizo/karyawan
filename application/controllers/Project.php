@@ -13,11 +13,30 @@ class Project extends CI_Controller {
 			$this->load->model('log_project_model');
 			$this->load->model('job_model');
 			$this->load->helper(array('form', 'url','directory'));
-			if(!$this->session->userdata("vendorCode")){
+			if(!$this->session->userdata("userCodex")){
 				redirect('/login', 'refresh');
 			}
 	}
+	public function approve($kode){
+		$this->db->where("project_id" , $kode);
+		$this->db->join("project_cat", "project_cat.cat_id=project.cat_id");
+		$this->db->join("parent_cat", "parent_cat.parentcatCode=project_cat.parentcatCode");
+		$a = $this->db->get("project")->row();
+		$ax = explode(",",$a->parentcatStruktur);
+		$jobdey = $this->db->query("select * from job where job_day=".$ax[0])->row();
+		print_r($jobdey);
+		if($a->project_status != "pending"){
+			$this->db->where("project_id" , $kode);
+			$this->db->limit(1);
+			$this->db->update("project" , array("project_status" => $jobdey->job_name));	
+		}
+		
+		redirect('/statusproject/detail/'.$kode, 'refresh');
+		
 
+
+
+	}
 
 	public function index()
 	{
