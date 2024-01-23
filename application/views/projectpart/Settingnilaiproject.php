@@ -11,10 +11,10 @@
                       <!-- text input -->
                       <div class="form-group">
                         <label>Masukan Nilai Kontrak BOQ</label>
-                        <input type="text" name="nilai_boq" value="<?=$dataresult->nilai_boq?>" class="boq form-control number-separator" placeholder="Enter ...">
+                        <input type="text" name="nilai_boq" readonly value="<?=$dataresult->nilai_boq?>" class="boq form-control number-separator" placeholder="Enter ...">
                         <label>Masukan Nilai SIUJK</label>
                         <input type="hidden" name="project_id" value="<?=$dataresult->project_id?>" class="form-control" placeholder="Enter ...">
-                        <input type="text" name="nilai_project" value="<?=$dataresult->nilai_project?>" class="form-control number-separator" placeholder="Enter ...">
+                        <input type="text" name="nilai_project" readonly value="<?=$dataresult->nilai_project?>" class="form-control number-separator" placeholder="Enter ...">
                         <label>Sharing Vendor (%)</label>
                         <input type="number" name="sharing_vendor" value="<?=$dataresult->sharing_vendor?>" class="form-control number-separator" placeholder="Enter ...">
                         <label>Sharing Owner (%)</label>

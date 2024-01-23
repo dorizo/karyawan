@@ -15,7 +15,6 @@
             <?php
             foreach ($designatorconfig as $key => $value) {
                  ?>
-                # code...
                 <div class="alert alert-primary">
                     ANDA BERADA DI FORM UPLOAD UNTUK DESIGNATOR : <?php print_r($value["designator_code"])?> / <?=$value["designator_desc"]?>
                     <input type="hidden" class="form-control" name="id_project_khs_v2_detail" value="<?=$value["id_project_khs_v2_detail"]?>" /><hr />
