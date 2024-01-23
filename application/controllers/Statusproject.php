@@ -17,6 +17,13 @@ class Statusproject extends CI_Controller {
 			
 	}
 
+	public function generateboq(){
+		$this->db->where("project_id" ,$this->input->post("project_id"));
+		$this->db->limit(1);
+		$this->db->update("project" , $this->input->post());
+		redirect('/statusproject/detail/'.$this->input->post("project_id"), 'refresh');
+	}
+
 	public function detail($id , $m =0)
 	{
 

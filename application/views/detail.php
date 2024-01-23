@@ -121,7 +121,10 @@
                     <?php } ?>
                     <hr />
                     <?php
-            foreach ($designatorlist as $key => $value) { ?>
+                    $total = 0;
+            foreach ($designatorlist as $key => $value) {
+                $total = $total +$value["total_designator"];
+                ?>
             <div class="card">
                <div class="card-body">
                 <h5 class="card-title"><?=$value["designator_code"]?></h5>
@@ -138,6 +141,29 @@
             }
             ?>
         </div>
+        <div class="card-footer">
+        <b>TOTAL BOQ : <?=rupiah($total);?></b><br />
+        <?php
+        $siujk = (($total *2)/100);
+         $totalsiuk = $total - $siujk;
+        ?>
+        <b>SIUJK :<?=rupiah($totalsiuk);?></b>
+        <?php if($this->session->userdata("akses") == "PM"){
+            ?>
+        <form method="post" action="<?=base_url("statusproject/generateboq")?>">
+                      <!-- text input -->
+                        <input type="hidden" name="nilai_boq" readonly value="<?=$total?>" class="boq form-control number-separator" placeholder="Enter ...">
+                        <input type="hidden" name="project_id" value="<?=$dataresult->project_id?>" class="form-control" placeholder="Enter ...">
+                        <input type="hidden" name="nilai_project" readonly value="<?=$totalsiuk?>" class="form-control number-separator" placeholder="Enter ...">
+                        <button type="submit" class="btn btn-primary">GENERATE NILAI BOQ</button>
+        </form>
+        <?php 
+        } 
+        ?>
+
+
+        </div>
+       
      </div>
 
 <!-- designator selesai -->
