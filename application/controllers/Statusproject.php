@@ -30,7 +30,14 @@ class Statusproject extends CI_Controller {
 		$data["log_project"] = $this->db->from("log_project")->where("project_id" , $id)->order_by("log_date","desc")->get()->result();
 		$data["upload_list"] = $this->db->from("karyawan_upload")->where("project_id" , $id)->order_by("log_date","desc")->get()->result();
 		$data["datastatus"] = $this->db->query("select * from job where job_name='".$data["dataresult"]->project_status."' order by job_day asc")->row();
-		$data["datastatusnext"] = $this->db->query("select * from job where job_day='".($data["datastatus"]->job_day +1)."' order by job_day asc")->row();
+		// print_r($data["dataresult"]);
+		// echo "<hr />";
+		$main = $this->db->query("select * from parent_cat where parentcatCode=".$data["dataresult"]->parentcatCode)->row();
+		$explod = explode(",",$main->parentcatStruktur);
+		// print_r($explod);
+		$index = array_search($data["datastatus"]->job_day, $explod);
+		$dayjobnext = ($explod[$index+1]);
+		$data["datastatusnext"] = $this->db->query("select * from job where job_day='".($dayjobnext)."' order by job_day asc")->row();
  		$this->load->view('template/header' , $data);
 		$this->load->view('detail', $data);
 		$this->load->view('template/footer');
