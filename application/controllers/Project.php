@@ -63,7 +63,7 @@ class Project extends CI_Controller {
 		}else{
 			$this->project_model->edit();
 			
-            redirect('/project', 'refresh');
+            redirect('/', 'refresh');
 		
 		}
 	}

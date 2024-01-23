@@ -35,20 +35,7 @@
                           </select>
                           
                         </div>
-                        <div class="form-group">
-                          <label>Status Project</label>
-                          <select name="project_status" class="custom-select">
-                              <option value="<?=$dataresult->project_status?>"><?=$dataresult->project_status?></option>
-                              <?php
-                              foreach ($datajob as $key => $value) {
-                                  # code...
-                                  echo "<option value=\"".$value['job_name']."\">".$value['job_name']."</option>";
-                              }
-                              ?>
-                      
-                          </select>
-                          
-                        </div>
+                        
                       </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>

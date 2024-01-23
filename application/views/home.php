@@ -46,17 +46,25 @@
                         Estimasi Selesai : <?=tanggalindo($value["project_done"])?><hr />
                         Estimasi Hari : <?=$value["project_paid"]?"Project Selesai":round($datediff / (60 * 60 * 24))." hari";?> <hr />
                        
-        <?php if($this->session->userdata("akses") == "OWNER"){ ?>
+        <?php if($this->session->userdata("akses") == "OWNER" or $this->session->userdata("akses") == "PM"){ ?>
                         Nilai Project : <?=rupiah($value["nilai_project"])?><br />
+                       Persentase API : <?=rupiah($value["sharing_owner"]);?>% <br />
+                       Persentase Vendor : <?=rupiah($value["sharing_vendor"]);?>% <br />
                        Bunga Berjalan : <?=rupiah($value["totalbungaseluruh"]);?> <br />
-                       Pembayaran Vendor :  <?=rupiah($value["paymentvendor"]);?><hr />
-                       <a class="btn btn-success" href="<?=base_url("project/approve/".$value['project_id'])?>">APPROVE PROJECT</a>
+                       Pembayaran Vendor :  <?=rupiah($value["paymentvendor"]);?>
+                       <?php if($this->session->userdata("akses") == "OWNER"){ ?>
+                        <hr />
+                        <a class="btn btn-success" href="<?=base_url("project/approve/".$value['project_id'])?>">APPROVE PROJECT</a>
+                      
+                        
+                       <?php }?>
                       
                        <?php } ?>
                        <hr />
                        <a class="btn btn-success" href="<?=base_url("statusproject/detail/".$value['project_id'])?>">Input Status</a>
                        
                       <?php if($this->session->userdata("akses") == "PM"){  ?>
+                        <a class="btn btn-success" href="<?=base_url("project/setting/".$value['project_id'])?>">Seting Project</a>
                        <a class="btn btn-success" href="<?=base_url("mandor/sematkan/".$value['project_id'])?>">Set Waspang</a>
                        <?php } ?>
                       
