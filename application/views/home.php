@@ -65,7 +65,7 @@
                        
                       <?php if($this->session->userdata("akses") == "PM"){  ?>
                         <a class="btn btn-success mt-2" href="<?=base_url("project/setting/".$value['project_id'])?>">Setting Project</a>
-                       <a class="btn btn-success mt-2" href="<?=base_url("mandor/sematkan/".$value['project_id'])?>">Set Waspang & Admin</a>
+                       <a class="btn btn-success mt-2" href="<?=base_url("mandor/sematkan/".$value['project_id'])?>">Setting Waspang & Admin</a>
                        <?php } ?>
                       
                       </div>
