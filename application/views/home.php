@@ -39,7 +39,7 @@
                     <td>
                     <div class="card card-primary card-outline">
                       <div class="card-body box-profile">
-                        <b><?=$value["project_code"]?> (<?=$value["project_name"]?>)</b><hr />
+                        <b><?=$value["project_code"]?> <br />(<?=$value["project_name"]?>)</b><hr />
                         KATEGORI <?=$value["cat_name"]?><hr />
                         Status <?=$value["project_status"]?><hr />
                         <!-- Estimasi Mulai : <?=tanggalindo($value["project_start"])?><hr /> -->
@@ -61,11 +61,11 @@
                       
                        <?php } ?>
                        <hr />
-                       <a class="btn btn-success" href="<?=base_url("statusproject/detail/".$value['project_id'])?>">Input Status</a>
+                       <a class="btn btn-success mt-2" href="<?=base_url("statusproject/detail/".$value['project_id'])?>">Input Status</a>
                        
                       <?php if($this->session->userdata("akses") == "PM"){  ?>
-                        <a class="btn btn-success" href="<?=base_url("project/setting/".$value['project_id'])?>">Setting Project</a>
-                       <a class="btn btn-success" href="<?=base_url("mandor/sematkan/".$value['project_id'])?>">Set Waspang</a>
+                        <a class="btn btn-success mt-2" href="<?=base_url("project/setting/".$value['project_id'])?>">Setting Project</a>
+                       <a class="btn btn-success mt-2" href="<?=base_url("mandor/sematkan/".$value['project_id'])?>">Set Waspang</a>
                        <?php } ?>
                       
                       </div>
