@@ -41,6 +41,8 @@
     </div>
     <?php
     if($dataresult->project_status=="SURVEY & SITAC"){ 
+        
+    if($this->session->userdata("akses") == "waspang"){
         $q = $this->db->query("select * from project_sitax where project_id=".$dataresult->project_id)->row();
        
         ?>
@@ -78,6 +80,7 @@
     
     <?php
     }
+}
     ?>
 
     <?php
