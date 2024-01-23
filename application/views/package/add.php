@@ -38,8 +38,13 @@
                       <input type="text" name="service_price" readonly  class="form-control number-separator" placeholder="">
                       </div>
                       <div class="form-group">
-                        <label>JUMLAH DESIGNATOR</label>
-                      <input type="text" name="jumlah_designator" class="form-control number-separator" placeholder="">
+                        <label>JUMLAH DESIGNATOR JASA</label>
+                      <input type="text" value=0 name="jumlah_designator" class="form-control number-separator" placeholder="">
+                      </div>
+                      
+                      <div class="form-group">
+                        <label>JUMLAH DESIGNATOR MATERIAL</label>
+                      <input type="text" value=0 name="jumlah_designator_material" class="form-control number-separator" placeholder="">
                       </div>
                       
                       <div class="form-group">
@@ -63,9 +68,10 @@
                 <p class="card-text"><?=$value["designator_desc"]?></p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"> <b>JUMLAH DESIGNATOR = </b> <?=$value["jumlah_designator"]?></li>
+                <li class="list-group-item"> <b>JUMLAH DESIGNATOR JASA = </b> <?=$value["jumlah_designator"]?></li>
+                <li class="list-group-item"> <b>JUMLAH DESIGNATOR MATERIAL = </b> <?=$value["jumlah_designator_material"]?></li>
                 <li class="list-group-item"> <b>SERVICE TOTAL = </b> <?=rupiah(($value["service_price"]*$value["jumlah_designator"]))?></li>
-                <li class="list-group-item"> <b>MATERIAL TOTAL =  </b><?=rupiah(($value["material_price"] *$value["jumlah_designator"] ))?></li>
+                <li class="list-group-item"> <b>MATERIAL TOTAL =  </b><?=rupiah(($value["material_price"] *$value["jumlah_designator_material"] ))?></li>
                 <li class="list-group-item"> <b>JUMLAH TOTAL  </b><?=rupiah($value["total_designator"])?></li>
               </ul>
               <div class="card-body">
@@ -92,8 +98,15 @@
     return $option;
   };
   $("input[name='jumlah_designator']").on( 'input' , function(a){
-    var param0 = $("input[name='material_price']").val() *  parseFloat($(this).val().replace(/,/g, ''));
+    var param0 = $("input[name='material_price']").val() *  parseFloat($("input[name='jumlah_designator_material']").val().replace(/,/g, ''));
     var param1 = $("input[name='service_price']").val() *  parseFloat($(this).val().replace(/,/g, ''));
+    var total = param0 + param1;
+    $("input[name='total_designator']").val(numberWithCommas(total)); 
+    
+  });
+  $("input[name='jumlah_designator_material']").on( 'input' , function(a){
+    var param0 = $("input[name='material_price']").val() *  parseFloat($(this).val().replace(/,/g, ''));
+    var param1 = $("input[name='service_price']").val() *  parseFloat($("input[name='jumlah_designator']").val().replace(/,/g, ''));
     var total = param0 + param1;
     $("input[name='total_designator']").val(numberWithCommas(total)); 
     
