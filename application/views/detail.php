@@ -85,45 +85,31 @@
 
     <?php
     if($this->session->userdata("akses") != "waspang"){
+        
+    $msd = $this->db->query("select * from karyawan_approve where status_day= ".$datastatus->job_day)->row();
     if($datastatusnext){
     ?>
     <div class="alert alert-success">
                 Step Anda Sekarang Berada di <b><?php print_r($datastatus->job_name)?></b> <br /> <br />
+                <div class="alert alert-danger">MEMERLUKAN APPROVEL <b><?= $msd->approval?></b> UNTUK LANJUT STEP BERIKUTNYA</div>
                 <?php 
-                 if($this->session->userdata("akses") == "PM"){ ?>
+                 if($this->session->userdata("akses") == $msd->approval){ ?>
    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                  
+                    
                     Rubah ke Step  <?=$datastatusnext->job_name?></button>
              
-                 <?php
-                 }
-
-                if($datastatus->job_day == 2){ 
-                    if($this->session->userdata("akses") == "KEUANGAN"){
-                     
-                    ?>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Rubah ke Step  <?=$datastatusnext->job_name?></button>  
-                <?php   
-                    }else{
-
-                        echo "PROSES BERADA DI KEUANGAN"; 
-                    } 
-                }elseif($datastatus->job_day > 12){ 
-                    if($this->session->userdata("akses") == "admin"){
-                     
-               
-                    ?>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Rubah ke Step  <?=$datastatusnext->job_name?></button>
-                <?php  }else{ echo "Proses Berada Di adminstrasi";} } ?>
-            </div>
-     <?php }else{?>
+                
+     <?php }
+    }else{?>
         <div class="alert alert-success">
-                Step sudah <b><?php print_r($datastatus->job_name)?></b> <br /> <br />
+                Step sudah <b><?php print_r($datastatus->job_name)?></b> <br />
 
             </div>
     <?php } }
     ?>
+     
+     </div>
 
 <!-- designator mulai -->
     <div class="card">
