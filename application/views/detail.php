@@ -26,7 +26,7 @@
             ?>
             <input type="hidden" class="form-control" name="project_id" value="<?=$dataresult->project_id?>" /><hr />
             <label>PROJECT STATUS</label>
-            <input type="text" class="form-control" name="project_status" value="<?=$dataresult->project_status?>" /><hr />
+            <input type="text" class="form-control" name="project_status" value="<?=$dataresult->project_status?>" readonly /><hr />
             <label>KETERANGAN EVIDENT</label>
             <input type="text" class="form-control" name="ket_upload"  /><hr />
            
