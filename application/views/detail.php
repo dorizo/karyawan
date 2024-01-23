@@ -143,7 +143,7 @@
 
 <!-- designator selesai -->
     <?php
-    if($this->session->userdata("akses") == "PM"){
+    if($this->session->userdata("akses") == "PM" or $this->session->userdata("akses") == "admin"){
        
     ?>
     <div class="card">
