@@ -116,7 +116,7 @@
         <div class="card-header"> Designator <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)</div>
         <div class="card-body">
             
-        <?php if($this->session->userdata("akses") == "admin"){ ?>
+        <?php if($this->session->userdata("akses") == "PM" or $this->session->userdata("akses") == "waspang"){ ?>
         <a class="btn btn-danger" href="<?=base_url("designator/add/".$dataresult->project_id)?>">Tambah Designator </a><br />
                     <small>Designator fungsi  </small>
                     <?php } ?>
