@@ -55,7 +55,10 @@
                        <?php } ?>
                        <hr />
                        <a class="btn btn-success" href="<?=base_url("statusproject/detail/".$value['project_id'])?>">Input Status</a>
+                       
+                      <?php if($this->session->userdata("akses") == "PM"){  ?>
                        <a class="btn btn-success" href="<?=base_url("mandor/sematkan/".$value['project_id'])?>">Set Waspang</a>
+                       <?php } ?>
                       
                       </div>
                     </div>

@@ -42,6 +42,7 @@ class Pengajuan extends CI_Controller {
 		$data["pengajuanproses"] = $pengajuan;
 		$data["akunbank"] = $this->akunbank_model->view();
 		$data["pengajuanstatus"] = $this->akunbank_pengajuan_model->pengajuanstatus($pengajuan);
+		$data["sitax"] = $this->db->query("select * from project_sitax where project_id=".$id)->row();
 	//   print_r($data["akunbank"]);
 	   if ($this->form_validation->run() === FALSE)
         {
