@@ -155,13 +155,35 @@
         ?>
         <b>SIUJK :<?=rupiah($totalsiuk);?></b>
         <?php if($this->session->userdata("akses") == "PM"){
+            $bayar = $this->db->query("select * from karyawan_project a  JOIN karyawan b ON b.karyawanCode=a.karyawanCode where project_id=".$dataresult->project_id)->result_array();
+            $nilaiwaspang = 0;
+            $nilaiadmin = 0;
+            foreach ($bayar as $key => $value) {
+            if($value["akses"]=="waspang"){
+                $nilaiwaspang = $nilaiwaspang + 1;
+            }
+            if($value["akses"]=="admin"){
+                $nilaiadmin = $nilaiadmin + 1;
+            }
+            $allnilai =  $nilaiadmin + $nilaiwaspang;
+
+               echo "<div class='alert alert-success'>".$value["akses"]." : ".$value["karyawanNama"]."</div>"; 
+            //    print_r($value);
+            }
+
             ?>
         <form method="post" action="<?=base_url("statusproject/generateboq")?>">
                       <!-- text input -->
                         <input type="hidden" name="nilai_boq" readonly value="<?=$total?>" class="boq form-control number-separator" placeholder="Enter ...">
                         <input type="hidden" name="project_id" value="<?=$dataresult->project_id?>" class="form-control" placeholder="Enter ...">
                         <input type="hidden" name="nilai_project" readonly value="<?=$totalsiuk?>" class="form-control number-separator" placeholder="Enter ...">
+                       <?php if($allnilai == 2){?>
                         <button type="submit" class="btn btn-primary">GENERATE NILAI BOQ</button>
+                       <?php }else{ ?>
+                        <div class="alert alert-danger">HARAP DISPOSISI PROJECT INI KE WASPANG DAN ADMIN TERLEBIH DAHULU !!!!!!!!!!!!!!!!!!!!!!!!!</div>
+
+                       <?php } ?>
+                        
         </form>
         <?php 
         } 
