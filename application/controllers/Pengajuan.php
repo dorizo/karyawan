@@ -116,6 +116,7 @@ class Pengajuan extends CI_Controller {
 
     public function add($id , $pengajuan="project"){
 
+        $data["dataresult"] = $this->project_model->viewSinggle($id);
 		$this->form_validation->set_rules('project_id', 'project_id', 'required');
 		$data["titlepage"] = "Transaksi Project ";
 		$data["project_id"] = $id;
