@@ -47,7 +47,7 @@ class Home extends CI_Controller {
 		
 		}
 		$config['upload_path']          = './uploads/absen/'.$date;
-		$config['allowed_types']        = 'gif|jpg|png';
+		$config['allowed_types']        = 'gif|jpg|png|jpeg|JPEG';
 		$config["encrypt_name"] = true;
 
 		$this->load->library('upload', $config);
