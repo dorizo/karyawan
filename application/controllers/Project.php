@@ -24,11 +24,41 @@ class Project extends CI_Controller {
 		$a = $this->db->get("project")->row();
 		$ax = explode(",",$a->parentcatStruktur);
 		$jobdey = $this->db->query("select * from job where job_day=".$ax[0])->row();
-		print_r($jobdey);
-		if($a->project_status != "pending"){
+		// print_r($jobdey);$dev = "gagal";
+		
+			$xxx = "gagal";
+			if($this->input->post("project_status") == "approve"){
+				$xxx  = "berhasil";
+			  }
+		if($xxx == "berhasil"){
 			$this->db->where("project_id" , $kode);
 			$this->db->limit(1);
 			$this->db->update("project" , array("project_status" => $jobdey->job_name));	
+		}else{
+			// echo $kode;
+			
+			$dev = "gagal";
+			if($a->project_status == "reject"){
+			  $dev  = "berhasil";
+			}
+			if($a->project_status == "pending"){
+			  $dev  = "berhasil";
+			}
+			if($a->project_status == "Pending"){
+				$dev  = "berhasil";
+			  }
+			
+			if($a->project_status == "return"){
+			  $dev  = "berhasil";
+			}
+			if($dev == "berhasil"){
+			$p = $this->input->post();
+			$this->db->where("project_id" , $kode);
+			$this->db->limit(1);
+			$this->db->update("project" , array("project_status" => $this->input->post("project_status")));	
+			$p["project_id"] = $kode;
+			$this->db->insert("catatandireksi" , $p);
+			}
 		}
 		
 		redirect('/statusproject/detail/'.$kode, 'refresh');

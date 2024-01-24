@@ -12,7 +12,8 @@
                     <input type="text" name="cari" value="<?=$this->input->get("cari")?>" class="form-control" aria-describedby="emailHelp" placeholder="INPUTKAN COST CENTER DISINI">
                     
         <?php if($this->session->userdata("akses") == "OWNER"){ ?>
-          <input type="checkbox" <?=$this->input->get("project_status")?"checked":""?> name="project_status" value="pending"> Pending
+          <input type="radio" <?=$this->input->get("project_status")=="pending"?"checked":""?> name="project_status" value="pending"> Pending
+          <input type="radio" <?=$this->input->get("project_status")=="return"?"checked":""?> name="project_status" value="return"> return
           <?php } ?>
                   </div>
                     <input type="submit" value="cari" class="btn btn-primary">
@@ -46,18 +47,55 @@
                         Estimasi Selesai : <?=tanggalindo($value["project_done"])?><hr />
                         Estimasi Hari : <?=$value["project_paid"]?"Project Selesai":round($datediff / (60 * 60 * 24))." hari";?> <hr />
                        
-        <?php if($this->session->userdata("akses") == "OWNER" or $this->session->userdata("akses") == "PM"){ ?>
+        <?php if($this->session->userdata("akses") == "OWNER" or $this->session->userdata("akses") == "PM"){
+          $dev = "gagal";
+         
+          if($value["project_status"] == "reject"){
+            $dev  = "berhasil";
+          }
+          if($value["project_status"] == "pending"){
+            $dev  = "berhasil";
+          }
+          
+          if($value["project_status"] == "Pending"){
+            $dev  = "berhasil";
+          }
+          
+          if($value["project_status"] == "return"){
+            $dev  = "berhasil";
+          }
+        if($dev == "berhasil"){
+   
+            ?>
+          
                         Nilai Project : <?=rupiah($value["nilai_project"])?><br />
                        Persentase API : <?=rupiah($value["sharing_owner"]);?>% <br />
                        Persentase Vendor : <?=rupiah($value["sharing_vendor"]);?>% <br />
                        Bunga Berjalan : <?=rupiah($value["totalbungaseluruh"]);?> <br />
                        Pembayaran Vendor :  <?=rupiah($value["paymentvendor"]);?>
+                      <?php 
+                      $dddd = $this->db->query("select catatan_direksi ,project_status from catatandireksi")->result_array();
+                      foreach ($dddd as $keyee => $valueee) { ?>
+                      <div class="alert alert-danger"><?=$valueee["catatan_direksi"]?> (<?=$valueee["project_status"]?>)</div>
+                        <?php
+                      }
+                      ?>
+
                        <?php if($this->session->userdata("akses") == "OWNER"){ ?>
                         <hr />
-                        <a class="btn btn-success" href="<?=base_url("project/approve/".$value['project_id'])?>">APPROVE PROJECT</a>
-                      
+                        <form action="<?=base_url("project/approve/".$value['project_id'])?>" method="post">
+                          <textarea name="catatan_direksi" class="form-control"></textarea><br />
+                          <select name="project_status"  class="form-control">
+                          <option value="pending">pending</option>
+                            <option value="return">return</option>
+                            <option value="approve">approve</option>
+                            <option value="reject">reject</option>
+                          </select><br />
+                          <button class="btn btn-success">Kirim</button>                      
+                        </form>
                         
-                       <?php }?>
+                        
+                       <?php } }?>
                       
                        <?php } ?>
                        <hr />
