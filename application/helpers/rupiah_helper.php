@@ -7,6 +7,13 @@ if ( ! function_exists('rupiah'))
     return 'Rp ' . number_format($var);
     }   
 }
+if ( ! function_exists('volume'))
+{
+    function volume($var = '')
+    {
+    return number_format($var);
+    }   
+}
 
 
 if ( ! function_exists('countday'))

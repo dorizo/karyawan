@@ -137,9 +137,25 @@
                 <p class="card-text"><?=$value["designator_desc"]?></p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"> <b>JUMLAH DESIGNATOR JASA = </b> <?=$value["jumlah_designator"]?></li>
-                <li class="list-group-item"> <b>JUMLAH DESIGNATOR MATERIAL = </b> <?=$value["jumlah_designator_material"]?> <?=$value["satuan"]?></li>
+                <li class="list-group-item"> <b>VOLUME JASA = </b> <?=volume($value["jumlah_designator"])?></li>
+                <li class="list-group-item"> <b>VOLUME MATERIAL = </b> <?=volume($value["jumlah_designator_material"])?> <?=$value["satuan"]?></li>
               </ul>
+              <hr />
+              LOG PERUBAHAN
+              <hr />
+              <?php
+              $SS = $this->db->query("select * from datateknis_projectkhs_detail_log where id_project_khs_v2_detail = ".$value["id_project_khs_v2_detail"])->result_array();  
+              foreach ($SS as $key => $value) {
+              ?>
+              <div class="alert alert-success">
+                TANGGAL PERUBAHAN : <?=$value["tanggal"]?><br />
+                PERUBAHAN SERVICE : <?=rupiah($value["service_price"])?><br />
+                PERUBAHAN MATERIAL : <?=rupiah($value["material_price"])?><br />
+                VOLUME JASA : <?=volume($value["jumlah_designator"])?><br />
+                VOLUME MATERIAL : <?=volume($value["jumlah_designator_material"])?><br />
+                TOTAL DESIGNATOR : <?=rupiah($value["total_designator"])?><br />
+              </div>
+              <?php } ?>
               <div class="card-body">
                 <a href="<?=base_url("statusproject/detail/".$id."/".$value["id_project_khs_v2_detail"])?>" class="card-link btn btn-primary">Upload evident</a>
               </div>

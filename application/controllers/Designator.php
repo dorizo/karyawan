@@ -66,6 +66,8 @@ public function edit($id , $main, $pengajuan="project"){
 		$this->load->view('template/footer');
 		
 		}else{
+
+			$this->db->query("insert into datateknis_projectkhs_detail_log (`id_project_khs_v2_detail`, `service_price`, `material_price`, `designator_id`, `designator_desc`, `designator_code`, `product_id`, `id_project_sub`, `witel_id`, `id_project_khs_v2`, `total_designator`, `jumlah_designator`, `jumlah_designator_material`, `Khs_status_project`, `id_stok`, `project_id`, `satuan` ,`tanggal` ) select * , now()  from datateknis_projectkhs_detail where id_project_khs_v2_detail=".$this->input->post("id_project_khs_v2_detail"));
 			$p = $this->input->post();
 			$m = $this->db->query("select * from designator where designator_id=".$this->input->post("designator_id"))->row();
 
@@ -74,7 +76,6 @@ public function edit($id , $main, $pengajuan="project"){
             $p["jumlah_designator"] =  str_replace(",", "",$this->input->post("jumlah_designator"));
             $p["jumlah_designator_material"] =  str_replace(",", "",$this->input->post("jumlah_designator_material"));
             $p["total_designator"] =  str_replace(",", "",$this->input->post("total_designator"));
-			print_r($p);
 			$this->db->where("id_project_khs_v2_detail" , $this->input->post("id_project_khs_v2_detail"));
 			$this->db->limit(1);
 			$this->db->update("datateknis_projectkhs_detail",$p);
