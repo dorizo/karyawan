@@ -15,10 +15,15 @@
             <?php
             foreach ($designatorconfig as $key => $value) {
                  ?>
-                <div class="alert alert-primary">
+                <div class="card alert-primary">
+                    <div class="card-header">
+                    <a style="color:#FFF" href="<?=base_url("statusproject/detail/".$dataresult->project_id)?>"><i class="fas fa-arrow-left"></i> Kembali Ke Upload Project</a>
+                    </div>
+                    <div class="card-header">
                     ANDA BERADA DI FORM UPLOAD UNTUK DESIGNATOR : <?php print_r($value["designator_code"])?> / <?=$value["designator_desc"]?>
                     <input type="hidden" class="form-control" name="id_project_khs_v2_detail" value="<?=$value["id_project_khs_v2_detail"]?>" /><hr />
-                 </div>
+                    </div> 
+                </div>
                 <hr />
             <?php
             }
