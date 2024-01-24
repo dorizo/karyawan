@@ -87,8 +87,9 @@
               </ul>
               <div class="card-body">
                 <!-- <a href="#" class="card-link">Edit</a> -->
-                <a href="<?=base_url("designator/hapus/").$value["id_project_khs_v2_detail"]."/".$value["project_id"]?>" class="card-link">Hapus</a>
-              </div>
+                <a href="<?=base_url("designator/hapus/").$value["id_project_khs_v2_detail"]."/".$value["project_id"]?>" class="btn btn-danger card-link">Hapus</a>
+                <a href="<?=base_url("designator/edit/").$value["id_project_khs_v2_detail"]."/".$value["project_id"]?>" class="btn btn-success card-link float-right">EDIT</a>
+               </div>
             </div>
              <?php
             }

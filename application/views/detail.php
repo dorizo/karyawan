@@ -137,7 +137,8 @@
                 <p class="card-text"><?=$value["designator_desc"]?></p>
               </div>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"> <b>JUMLAH DESIGNATOR = </b> <?=$value["jumlah_designator"]?> <?=$value["satuan"]?></li>
+                <li class="list-group-item"> <b>JUMLAH DESIGNATOR JASA = </b> <?=$value["jumlah_designator"]?></li>
+                <li class="list-group-item"> <b>JUMLAH DESIGNATOR MATERIAL = </b> <?=$value["jumlah_designator_material"]?> <?=$value["satuan"]?></li>
               </ul>
               <div class="card-body">
                 <a href="<?=base_url("statusproject/detail/".$id."/".$value["id_project_khs_v2_detail"])?>" class="card-link btn btn-primary">Upload evident</a>

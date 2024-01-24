@@ -45,6 +45,7 @@ class Designator extends CI_Controller {
         }
     }
 
+
 	public function getnilaipaket(){
 		// print_r($this->input->post());
 		$this->db->where($this->input->post());
@@ -52,6 +53,36 @@ class Designator extends CI_Controller {
 		echo json_encode($s);
 
 	}
+public function edit($id , $main, $pengajuan="project"){
+		$this->form_validation->set_rules('designator_id', 'designator_id', 'required');
+		 $data["dataresult"] = $this->project_model->viewSinggle($id);
+		 $data["editresult"] = $this->db->get_where("datateknis_projectkhs_detail" ,array("id_project_khs_v2_detail" => $id))->row();
+        $data["titlepage"] = "EDIT DESIGNATOR ";
+		$data["project_id"] = $id;
+	   if ($this->form_validation->run() === FALSE)
+        {
+     	$this->load->view('template/header' , $data);
+		$this->load->view('package/edit' , $data);
+		$this->load->view('template/footer');
+		
+		}else{
+			$p = $this->input->post();
+			$m = $this->db->query("select * from designator where designator_id=".$this->input->post("designator_id"))->row();
+
+            $p["designator_desc"] =$m->designator_desc ;
+            $p["designator_code"] =$m->designator_code ;
+            $p["jumlah_designator"] =  str_replace(",", "",$this->input->post("jumlah_designator"));
+            $p["jumlah_designator_material"] =  str_replace(",", "",$this->input->post("jumlah_designator_material"));
+            $p["total_designator"] =  str_replace(",", "",$this->input->post("total_designator"));
+			print_r($p);
+			$this->db->where("id_project_khs_v2_detail" , $this->input->post("id_project_khs_v2_detail"));
+			$this->db->limit(1);
+			$this->db->update("datateknis_projectkhs_detail",$p);
+			
+			redirect('/designator/add/'.$main, 'refresh');
+        }
+    }
+
 	public function hapus($id, $x){
 		$this->db->where("id_project_khs_v2_detail" , $id);
 			$this->db->limit(1);
