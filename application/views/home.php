@@ -74,7 +74,7 @@
                        Bunga Berjalan : <?=rupiah($value["totalbungaseluruh"]);?> <br />
                        Pembayaran Vendor :  <?=rupiah($value["paymentvendor"]);?>
                       <?php 
-                      $dddd = $this->db->query("select catatan_direksi ,project_status from catatandireksi")->result_array();
+                      $dddd = $this->db->query("select catatan_direksi ,project_status from catatandireksi where project_id=".$value["project_id"])->result_array();
                       foreach ($dddd as $keyee => $valueee) { ?>
                       <div class="alert alert-danger"><?=$valueee["catatan_direksi"]?> (<?=$valueee["project_status"]?>)</div>
                         <?php

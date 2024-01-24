@@ -26,11 +26,13 @@ class Project extends CI_Controller {
 		$jobdey = $this->db->query("select * from job where job_day=".$ax[0])->row();
 		// print_r($jobdey);$dev = "gagal";
 		
+		
 			$xxx = "gagal";
 			if($this->input->post("project_status") == "approve"){
 				$xxx  = "berhasil";
 			  }
 		if($xxx == "berhasil"){
+			// print_r($this->input->post());
 			$this->db->where("project_id" , $kode);
 			$this->db->limit(1);
 			$this->db->update("project" , array("project_status" => $jobdey->job_name));	
@@ -51,6 +53,9 @@ class Project extends CI_Controller {
 			if($a->project_status == "return"){
 			  $dev  = "berhasil";
 			}
+			// echo $dev;
+			// print_r($this->input->post());
+			
 			if($dev == "berhasil"){
 			$p = $this->input->post();
 			$this->db->where("project_id" , $kode);
