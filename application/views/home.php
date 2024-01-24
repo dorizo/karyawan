@@ -49,7 +49,22 @@
                         Estimasi Selesai : <?=tanggalindo($value["project_done"])?><hr />
                         Estimasi Hari : <?=$value["project_paid"]?"Project Selesai":round($datediff / (60 * 60 * 24))." hari";?> <hr />
                        
-        <?php if($this->session->userdata("akses") == "OWNER" or $this->session->userdata("akses") == "PM"){
+        <?php if($this->session->userdata("akses") == "OWNER" or $this->session->userdata("akses") == "PM"){ ?>
+
+          Nilai Project : <?=rupiah($value["nilai_project"])?><br />
+                       Persentase API : <?=rupiah($value["sharing_owner"]);?>% <br />
+                       Persentase Vendor : <?=rupiah($value["sharing_vendor"]);?>% <br />
+                       Bunga Berjalan : <?=rupiah($value["totalbungaseluruh"]);?> <br />
+                       Pembayaran Vendor :  <?=rupiah($value["paymentvendor"]);?>
+                      <?php 
+                      $dddd = $this->db->query("select catatan_direksi ,project_status from catatandireksi where project_id=".$value["project_id"])->result_array();
+                      foreach ($dddd as $keyee => $valueee) { ?>
+                      <div class="alert alert-danger"><?=$valueee["catatan_direksi"]?> (<?=$valueee["project_status"]?>)</div>
+                        <?php
+                      }
+                      ?>
+
+          <?php
           $dev = "gagal";
          
           if($value["project_status"] == "reject"){
@@ -70,18 +85,6 @@
    
             ?>
           
-                        Nilai Project : <?=rupiah($value["nilai_project"])?><br />
-                       Persentase API : <?=rupiah($value["sharing_owner"]);?>% <br />
-                       Persentase Vendor : <?=rupiah($value["sharing_vendor"]);?>% <br />
-                       Bunga Berjalan : <?=rupiah($value["totalbungaseluruh"]);?> <br />
-                       Pembayaran Vendor :  <?=rupiah($value["paymentvendor"]);?>
-                      <?php 
-                      $dddd = $this->db->query("select catatan_direksi ,project_status from catatandireksi where project_id=".$value["project_id"])->result_array();
-                      foreach ($dddd as $keyee => $valueee) { ?>
-                      <div class="alert alert-danger"><?=$valueee["catatan_direksi"]?> (<?=$valueee["project_status"]?>)</div>
-                        <?php
-                      }
-                      ?>
 
                        <?php if($this->session->userdata("akses") == "OWNER"){ ?>
                         <hr />
