@@ -16,8 +16,8 @@
   <!-- Main Footer -->
   <footer class="main-footer">
     <div class="row">
-      <div class="col-6 text-center"><a href="<?=base_url("/")?>"><i class="fas fa-home"></i></a></div>
-      <div class="col-6 text-center"><a href="<?=base_url("/home/add")?>"><i class="nav-icon far fa-plus-square"></i></a></div>
+      <div class="col-6 text-center"><a href="<?=base_url("/")?>" class="menu-bawah"><i class="fas fa-home"></i></a></div>
+      <div class="col-6 text-center"><a href="<?=base_url("/home/add")?>" class="menu-bawah"><i class="nav-icon far fa-plus-square"></i></a></div>
     </div>
   </footer>
 </div>
@@ -34,5 +34,21 @@
 <script src="<?=base_url()?>asset/plugins/chart.js/Chart.min.js"></script>
 <script src="<?=base_url()?>asset/js/easy-number-separator.js"></script>
 <!-- AdminLTE for demo purposes -->
+<style>
+  .main-footer{
+    padding:0px;
+  }
+  .menu-bawah {
+    display:inline-block;
+    width: 100%;
+    font-size:25px;
+    padding:10px
+    
+  }
+  .menu-bawah:hover {
+  background-color: #007BFF;
+  }
+
+</style>
 </body>
 </html>
