@@ -26,7 +26,18 @@
                       <div class="form-group">
                         <label>SATUAN DESIGNATOR</label>
                       <input type="hidden" name="project_id"   value="<?=$dataresult->project_id?>" >
-                      <input type="text" name="satuan"   class="form-control" placeholder="">
+                      <select class="form-control" name="satuan">
+                        <option value="pcs">pcs</option>
+                        <option value="core">core</option>
+                        <option value="m3">m3</option>
+                        <option value="meter">meter</option>
+                        <option value="node">node</option>
+                        <option value="set">set</option>
+                        <option value="titik">titik</option>
+                        <option value="track">track</option>
+                        <option value="unit">unit</option>
+                        <option value="lumpsump">lumpsump</option>
+                      </select>
                       </div>
                       <div class="form-group">
                         <label>NILAI MATERIAL SATUAN</label>
