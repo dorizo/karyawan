@@ -46,7 +46,7 @@ class Statusproject extends CI_Controller {
 		// print_r($explod);
 		$dayjobnext =0;
 		if($data["datastatus"]){
-			echo "ssdfd";
+			// echo "ssdfd";
 			$index = array_search($data["datastatus"]->job_day, $explod);
 		$dayjobnext = ($explod[$index+1]);
 		
