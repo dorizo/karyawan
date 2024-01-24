@@ -33,17 +33,24 @@ class Statusproject extends CI_Controller {
 		$data["id"]= $id;
 		 $data["designatorconfig"] = $this->db->query("select * from datateknis_projectkhs_detail where id_project_khs_v2_detail=".$m)->result_array();
         $data["designatorlist"] = $this->db->query("select * from datateknis_projectkhs_detail where project_id=".$id)->result_array();
+		
 		$data["dataresult"] = $this->project_model->viewSinggle($id);
 		$data["log_project"] = $this->db->from("log_project")->where("project_id" , $id)->order_by("log_date","desc")->get()->result();
 		$data["upload_list"] = $this->db->from("karyawan_upload")->where("project_id" , $id)->order_by("log_date","desc")->get()->result();
+
 		$data["datastatus"] = $this->db->query("select * from job where job_name='".$data["dataresult"]->project_status."' order by job_day asc")->row();
 		// print_r($data["dataresult"]);
 		// echo "<hr />";
 		$main = $this->db->query("select * from parent_cat where parentcatCode=".$data["dataresult"]->parentcatCode)->row();
 		$explod = explode(",",$main->parentcatStruktur);
 		// print_r($explod);
-		$index = array_search($data["datastatus"]->job_day, $explod);
+		$dayjobnext =0;
+		if($data["datastatus"]){
+			echo "ssdfd";
+			$index = array_search($data["datastatus"]->job_day, $explod);
 		$dayjobnext = ($explod[$index+1]);
+		
+		}
 		$data["datastatusnext"] = $this->db->query("select * from job where job_day='".($dayjobnext)."' order by job_day asc")->row();
  		$this->load->view('template/header' , $data);
 		$this->load->view('detail', $data);

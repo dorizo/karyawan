@@ -89,8 +89,9 @@
 
     <?php
     if($this->session->userdata("akses") != "waspang"){
-        
+    if($datastatus){
     $msd = $this->db->query("select * from karyawan_approve where status_day= ".$datastatus->job_day)->row();
+    }
     if($datastatusnext){
     ?>
     <div class="alert alert-success">
