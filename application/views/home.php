@@ -14,7 +14,9 @@
         <?php if($this->session->userdata("akses") == "OWNER"){ ?>
           <input type="radio" <?=$this->input->get("project_status")=="pending"?"checked":""?> name="project_status" value="pending"> Pending
           <input type="radio" <?=$this->input->get("project_status")=="return"?"checked":""?> name="project_status" value="return"> return
-          <?php } ?>
+          <input type="radio" <?=$this->input->get("project_status")=="reject"?"checked":""?> name="project_status" value="reject"> reject
+          
+           <?php } ?>
                   </div>
                     <input type="submit" value="cari" class="btn btn-primary">
                   </form>
