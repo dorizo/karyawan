@@ -63,11 +63,11 @@
                     <input type="hidden" class="form-control" name="sitax_id" value="<?=$q?$q->sitax_id:""?>" /><hr />
                     
                     <input type="hidden" class="form-control" name="project_id" value="<?=$dataresult->project_id?>" /><hr />
-                    Sitac Desc
+                    KETERANGAN SITAC
                     <input type="text" class="form-control " name="sitax_list"  value="<?=$q?$q->sitax_list:""?>" /><hr />
-                    Sitac pembayaran
+                    SITAC AKTUAL/REAL
                     <input type="text" class="form-control number-separator" name="sitax_total" value="<?=$q?$q->sitax_total:""?>" /><hr />
-                    Sitac Penagihan
+                    SITAC PENAGIHAN
                     <input type="text" class="form-control number-separator" name="sitax_penagihan" value="<?=$q?$q->sitax_penagihan:""?>" /><hr />
                     
                     <button class="btn btn-primary mx-3" id="btnFetch" type="submit"  onclick="javascript=this.disabled = true; form.submit();">
