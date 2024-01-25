@@ -177,10 +177,10 @@
             $nilaiadmin = 0;
             foreach ($bayar as $key => $value) {
             if($value["akses"]=="waspang"){
-                $nilaiwaspang = $nilaiwaspang + 1;
+                $nilaiwaspang =  1;
             }
             if($value["akses"]=="admin"){
-                $nilaiadmin = $nilaiadmin + 1;
+                $nilaiadmin = 1;
             }
             $allnilai =  $nilaiadmin + $nilaiwaspang;
 
