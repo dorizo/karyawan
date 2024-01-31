@@ -860,13 +860,12 @@
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                 <?php
-                $segments = $this->uri->segment_array();
-                $last_segment = '';
-                foreach ($segments as $segment) {
-                    $last_segment .= '/' . $segment;
-                    echo ' <li class="breadcrumb-item"><a href="'.base_url($last_segment).'">' . ucfirst(str_replace(array('-', '_'), '', $segment)) . '</a></li>';
-                    // echo '/<a href="www.homepage.com' . $last_segment . '">' . ucfirst(str_replace(array('-', '_'), '', $segment)) . '</a>';
-                }
+                // $segments = $this->uri->segment_array();
+                // $last_segment = '';
+                // foreach ($segments as $segment) {
+                //     $last_segment .= '/' . $segment;
+                //     echo ' <li class="breadcrumb-item"><a href="'.base_url($last_segment).'">' . ucfirst(str_replace(array('-', '_'), '', $segment)) . '</a></li>';
+                //   }
                 ?>
                 <!-- <li class="breadcrumb-item"><a href="#">Home</a></li>
                 <li class="breadcrumb-item ">Dashboard v3</li> -->

@@ -67,12 +67,20 @@ class Home extends CI_Controller {
 		}
 
 	}
+
+	public function datakategori($id){
+		
+		$data = $this->db->query("select * from project_cat where parentcatCode=$id")->result_array();
+		echo json_encode($data);
+
+	}
 	public function add(){
 		
 		$data["titlepage"] = "FITURE LAINNYA";
 		$data["absen"] = $this->db->from("absen")->where("mappingCode" , $this->session->userdata("karyawanCode"))->where("DATE_FORMAT(create_at , '%Y-%m-%d')=" , date("Y-m-d"))->get()->num_rows();
 		
         $data["vendorresult"] = $this->vendor_model->view();
+		$data["parentkat"] =  $this->db->query("SELECT * FROM `parent_cat`")->result_array();
 		
         $data["witelresult"] = $this->witel_model->view();
 		$data["kategori"] = $this->db->query("select * from project_cat")->result_array();
