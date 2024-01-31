@@ -224,7 +224,7 @@
                         <div class="card-header"> Perancangan <br />(<?=$dataresult->project_code?> / <?=$dataresult->project_name?>)</div>
                         <div class="card-body">
                         <?php
-                            $dataperancangan = $this->db->query("select * from projectPerancangan where project_id=$id")->result_array();
+                            $dataperancangan = $this->db->query("select * from projectperancangan where project_id=$id")->result_array();
                                 ?>
                                     <?php if($this->session->userdata("akses") == "PM"){ ?>
                                         <a class="btn btn-danger" href="<?=base_url("perancangan/add/".$dataresult->project_id)?>">Tambah Perancangan </a>
