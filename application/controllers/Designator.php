@@ -38,6 +38,8 @@ class Designator extends CI_Controller {
 
             $p["designator_desc"] =$m->designator_desc ;
             $p["designator_code"] =$m->designator_code ;
+            $p["jumlah_designator"] =  str_replace(",", "",$this->input->post("jumlah_designator"));
+            $p["jumlah_designator_material"] =  str_replace(",", "",$this->input->post("jumlah_designator_material"));
             $p["total_designator"] =  str_replace(",", "",$this->input->post("total_designator"));
 			$this->db->insert("datateknis_projectkhs_detail",$p);
 			
