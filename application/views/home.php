@@ -125,7 +125,7 @@
                          <a class="btn btn-success mt-2" href="<?=base_url("project/setting/".$value['project_id'])?>">Setting Project</a>
                         <a class="btn btn-success mt-2" href="<?=base_url("mandor/sematkan/".$value['project_id'])?>">Setting Waspang & Admin</a>
                         <?php } ?>
-                       
+                      
                       </div>
                     </div>
                     </td>

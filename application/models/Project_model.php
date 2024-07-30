@@ -59,5 +59,29 @@ class Project_model extends CI_Model {
                 $p["project_status"] = "Pending";
                 $this->db->insert("project" , $p);     
         }
+        public function projectoutstendingkode($kode){
+                $this->db->select("a.* , b.suratpesananoutstandingCode,b.suratpesananCode,b.nilai_outstanding");
+                $this->db->where("status_paid","OUTSTENDING");
+                $this->db->JOIN("suratpesananoutstanding b","a.project_id=b.project_id","LEFT");
+                $this->db->JOIN("suratpesanan c","c.suratpesananCode=b.suratpesananCode","LEFT");
+                $this->db->where("c.suratpesananCode",$kode);
+                $db = $this->db->get("project a");
+                return $db->result_array();
+        }
+        
+        public function projectoutstending(){
+                $this->db->select("a.* , b.suratpesananoutstandingCode,b.suratpesananCode,b.nilai_outstanding");
+                $this->db->where("status_paid","OUTSTENDING");
+                $this->db->JOIN("suratpesananoutstanding b","a.project_id=b.project_id","LEFT");
+                $this->db->where("suratpesananoutstandingCode  IS NULL");
+                $db = $this->db->get("project a");
+                return $db->result_array();
+        }
+        public function projectoutstendingcount(){
+                $this->db->select("(sum(a.nilai_project) - sum(a.nilai_project_paid)) as poin");
+                $this->db->where("status_paid","OUTSTENDING");
+                $db = $this->db->get("project a");
+                return $db->row();
+        }
 
 }
