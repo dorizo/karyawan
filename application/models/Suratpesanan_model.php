@@ -6,6 +6,9 @@ class Suratpesanan_model extends CI_Model {
                 $this->load->database();
         }
         public function view(){
+            if($this->input->get("NoSuratpesanan")){    
+             $this->db->like("NoSuratpesanan" , $this->input->get("NoSuratpesanan"));
+            }
             $db = $this->db->get("suratpesanan");
             return $db->result_array();
         }
