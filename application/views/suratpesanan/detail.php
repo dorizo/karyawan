@@ -1,5 +1,4 @@
 
-<div style="overflow-x:auto;">
                         <table id="example1" class="table table-bordered table-hover">
                                               <thead>
                                             <tr>
@@ -29,7 +28,6 @@
                                                 ?>
                                             </tbody>
                         </table>
-                                              </div>
                         <div class="row col-12">
                           <div class="col-12">
                             <div class="card">
@@ -37,8 +35,7 @@
                                 OUTSTANDING SURAT PESANAN
                                 <a href="<?=base_url("suratpesanan/addoutstanding/".$id)?>" class="btn btn-success float-right">Tambah</a>
                               </div>
-                              <div class="card-body" style="overflow-x:auto;">
-                                
+                              <div class="card-body">
                               <table id="example1" class="table table-bordered table-hover">
                                               <thead>
                                             <tr>

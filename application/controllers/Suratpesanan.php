@@ -13,7 +13,7 @@ class Suratpesanan extends CI_Controller {
 			$this->load->model('akunakutansi_model');
 			$this->load->model("job_model");
 			
-			if(!$this->session->userdata("karyawanNip")){
+			if(!$this->session->userdata("userCode")){
 				redirect('/login', 'refresh');
 			}
 	}
@@ -98,9 +98,17 @@ class Suratpesanan extends CI_Controller {
 
 	public function submitnilaiproject(){
 		$title = str_replace( array( '\'', '.', ',' , ';', '<', '>' ), '', $this->input->post("nilai_project_paid"));
+		$material = str_replace( array( '\'', '.', ',' , ';', '<', '>' ), '', $this->input->post("material"));
+		
+		 $this->input->post("material");
+		 $this->db->where("project_id" , $this->input->post("project_id"));
+		 $hitungperformansi = $this->db->get("project")->row();
+		$performansi =  ($hitungperformansi->nilai_boq*$this->input->post("performansi"))/100;
 		$this->db->where("project_id" , $this->input->post("project_id"));
 		$this->db->limit(1);
 		$this->db->set("nilai_project_paid" ,$title);
+		$this->db->set("material" ,$material);
+		$this->db->set("performansi" ,$performansi);
 		$this->db->update('project');
 		redirect($_SERVER['HTTP_REFERER']);
 	}
@@ -208,4 +216,22 @@ class Suratpesanan extends CI_Controller {
             redirect('/suratpesanan', 'refresh'); 
         }
     }
+
+	public function editprojectdate(){
+			$this->db->where("suratpesananCode" , $this->input->post("suratpesananCode"));
+			$P = $this->db->get("suratpesanandetail")->result_array();
+			$p = [];
+			foreach ($P as $key => $value) {
+				print_r($value);
+				$SA = $this->input->post();
+				unset($SA["suratpesananCode"]);
+				$this->db->where("project_id" , $value["project_id"]);
+				$this->db->limit(1);
+				$this->db->update("project" , $SA);
+				
+			}
+			
+            redirect('/suratpesanan/editkategori/'.$this->input->post("suratpesananCode"), 'refresh'); 
+
+	}
 }

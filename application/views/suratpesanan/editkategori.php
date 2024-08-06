@@ -23,7 +23,7 @@
                               <option value="<?=$value["job_name"]?>"><?=$value["job_name"]?></option>
                               <?php
                               };
-                             
+                              
                           }
                               ?>
                           </select>
@@ -36,34 +36,50 @@
                 </form>
               </div>
             </div>
+           
 
 </div>
-<div style="overflow-x:auto;">
-<table id="example" class="table table-bordered table-hover">
+
+<div class="card-body table-responsive p-0" >
+<table class="table table-head-fixed text-nowrap">  
                   <thead>
                     <tr>
                       <th>NO CODE</th>
-                      <th>Witel</th>
-                      <th>NAMA SURAT PESANAN</th>
-                      <th>NILAI SURAT PESANAN</th>
+                      <th>project</th>
+                      <th>project Name</th>
+                      <th>Status</th>
+                      <th>NILAI BOQ</th>
                       <th>Nilai Paid Project</th>
-                      <th>STATUS PROJECT</th>
+                      <th>Material</th>
+                      <th>Performansi</th>
+                      <th>Tanggal Cash&bank</th>
+                      <th>Tanggal PAID</th>
+                      <th>Mode</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
                     $totalpaid = 0;
                     $totalBoq = 0;
+                    $performansi = 0;
+                    $material = 0;
                     foreach ($dataresult as $key => $value) { 
                       $totalpaid=$totalpaid + $value["nilai_project_paid"];
-                      $totalBoq=$totalBoq + $value["nilai_project"];
+                      $totalBoq=$totalBoq + $value["nilai_boq"];
+                      $performansi=$performansi + $value["performansi"];
+                      $material=$material + $value["material"];
                     ?>
                     <tr class="odd">
                       <td><?=$value["witel"]?></td>
                       <td><?php print_r($value["project_code"])?></td>
+                      <td><?php print_r($value["project_name"])?></td>
                       <td><?=$value["project_status"]?></td>
-                      <td><?=rupiah($value["nilai_project"])?></td>
+                      <td><?=rupiah($value["nilai_boq"])?></td>
                       <td><?=rupiah($value["nilai_project_paid"])?></td>
+                      <td><?=rupiah($value["material"])?></td>
+                      <td><?=rupiah($value["performansi"])?></td>
+                      <td><?=$value["tanggal_cashbank"]?></td>
+                      <td><?=$value["project_paid"]?></td>
                       
                       <td>
                         <?=$value["project_status"]?>
@@ -77,10 +93,20 @@
                     <?php } ?>
 
                     </body>
-                    </table></div>
+                    </table>
+ </div>
                     <div class="row alert alert-success">
+                      <div class="h5 col-4">TOTAL Performansi</div>
+                      <div class="h5 col-8"> <?=rupiah($performansi)?></div>
+                      <div class="h5 col-4">TOTAL Material</div>
+                      <div class="h5 col-8"> <?=rupiah($material)?></div>
                       <div class="h5 col-4">TOTAL PAID PROJECT</div>
                       <div class="h5 col-8"> <?=rupiah($totalpaid)?></div>
+                      <div class="row col-12 alert alert-warning">
+                      <div class="h5 col-4">Total Bersih</div>
+                      <div class="h5 col-8"> <?=rupiah($totalpaid - $performansi -$material)?></div>
+                      </div>
+
                       <div class="h5 col-4">TOTAL BOQ PROJECT</div>
                       <div class="h5 col-8"><?=rupiah($totalBoq)?></div>
                     </div>
@@ -102,6 +128,10 @@
         <input id="project_id" class="form-control" name="project_id" type="text" value="" readonly>
         <span>Input nilai real project</span>
         <input id="nilai_project_paid"  class="form-control" name="nilai_project_paid" type="text" value="" ><br />
+        <span>Potongan Material </span>
+        <input id="material"  class="form-control" name="material" type="text" value="" ><br />
+        <span>Potongan performasi</span>
+        <input class="form-control col-3" readonly name="performansi" type="text" value="5" ><small> 5% dari BOQ</small><br />
         <button type="submit" class="btn btn-primary">Save changes</button>
         </form>
       </div>
@@ -125,6 +155,12 @@ var tanpa_rupiah = document.getElementById('nilai_project_paid');
     tanpa_rupiah.addEventListener('keyup', function(e)
     {
         tanpa_rupiah.value = formatRupiah(this.value);
+    });
+    
+var material = document.getElementById('material');
+material.addEventListener('keyup', function(e)
+    {
+        material.value = formatRupiah(this.value);
     });
     function formatRupiah(angka, prefix)
     {

@@ -5,9 +5,9 @@
                 <a class="btn btn-danger" href="<?=base_url("suratpesanan/add")?>">Tambah</a>
               </div>
               <!-- /.card-header -->
-              <div class="card-body">
-                <div id="example2_wrapper" style="overflow-x:auto;" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12">
-                <table id="example" class="table table-bordered table-hover">
+              <div class="card-body table-responsive p-0" >
+                <div id="example2_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"></div><div class="col-sm-12 col-md-6"></div></div><div class="row"><div class="col-sm-12">
+                 <table class="table table-head-fixed text-nowrap">  
                   <thead>
                     <tr>
                       <th>NO CODE</th>

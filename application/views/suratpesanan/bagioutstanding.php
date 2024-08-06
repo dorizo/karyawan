@@ -1,5 +1,4 @@
 
-<div style="overflow-x:auto;">
 <table id="example1" class="table table-bordered table-hover">
 <form method="post">
                       <thead>
@@ -36,4 +35,3 @@
                         
  </form>
                         </table>
-                      </div>
