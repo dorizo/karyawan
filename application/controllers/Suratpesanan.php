@@ -13,7 +13,7 @@ class Suratpesanan extends CI_Controller {
 			$this->load->model('akunakutansi_model');
 			$this->load->model("job_model");
 			
-			if(!$this->session->userdata("userCode")){
+			if(!$this->session->userdata("karyawanNip")){
 				redirect('/login', 'refresh');
 			}
 	}
