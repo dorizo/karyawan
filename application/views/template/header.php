@@ -229,6 +229,18 @@
                   </a>
                 </li>
               <?php } ?>
+              
+              <?php if($this->session->userdata("akses") == "PM" or $this->session->userdata("akses") == "admin"){  ?>
+                      
+                      <li class="nav-item">
+                        <a href="<?=base_url("pengajuanho")?>" class="nav-link">
+                          <i class="nav-icon fas fa-th"></i>
+                          <p>
+                            Pengajuan HO
+                          </p>
+                        </a>
+                      </li>
+                    <?php } ?>
          
           <!-- <li class="nav-item">
             <a href="#" class="nav-link">
