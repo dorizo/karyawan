@@ -103,7 +103,7 @@ class Statusproject extends CI_Controller {
 				$errors= array();
 				// Authentication with Google Cloud Platform
 				$client = new StorageClient([
-					'keyFilePath' => getcwd().'\stoked-clone-433103-n2-cae2b0391f98.json',
+					'keyFilePath' => getcwd().'/stoked-clone-433103-n2-cae2b0391f98.json',
 				]);
 				$bucket = $client->bucket('ciptateknologimuda');
 	
