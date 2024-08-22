@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+require_once "vendor/autoload.php";
+use Google\Cloud\Storage\StorageClient;
 class Statusproject extends CI_Controller {
 
 	
@@ -88,7 +90,45 @@ class Statusproject extends CI_Controller {
 			$this->load->view('template/error' , $data);
 			$this->load->view('template/footer');
 	}
+
+
 	public function adddetail(){
+		
+			$date = str_replace( ':', '', date('Y-m-d'));
+			$data = $_FILES["filedata"];
+			$data["div"] = "alert-success";
+			$data["titlepage"] = "Berhasil Di input";
+			$data["error"] = "Data Berhasil Di input";
+			if(isset($data)){
+				$errors= array();
+				// Authentication with Google Cloud Platform
+				$client = new StorageClient([
+					'keyFilePath' => getcwd().'\stoked-clone-433103-n2-cae2b0391f98.json',
+				]);
+				$bucket = $client->bucket('ciptateknologimuda');
+	
+				// Upload a file to the bucket.
+				$file = pathinfo($data['name']);
+				$prefix = uniqid('data_', true); //generate random string to avoid name conflicts
+				$filename = $prefix . "." . $file['extension'];
+				$post = $this->input->post();
+				$post["filedata"] = $date."/".$filename;
+	
+				$bucket->upload(
+				fopen($data['tmp_name'], 'r'),
+				['name' => "uploads/$date/".$filename]
+				);  
+				$this->db->insert("karyawan_upload" , $post);
+				$postlog =array("tables" => "karyawan_upload", "log_date" => date("Y-m-d h:i:sa"), "log_name" => "update  foto di ".$post["project_status"]." di update oleh ".$this->session->userdata("karyawanNama") , "project_id" => $this->input->post("project_id"));
+				$this->db->insert("log_project" , $postlog);
+				$this->load->view('template/headerpage' , $data);
+				$this->load->view('template/error' , $data);
+				$this->load->view('template/footer');
+			}
+			
+	}
+
+	public function adddetailold(){
 		$date = str_replace( ':', '', date('Y-m-d'));
 		if (!is_dir('uploads/'.$date)) {
 			mkdir('./uploads/' . $date, 0777, TRUE);

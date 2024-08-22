@@ -35,7 +35,7 @@
             <label>KETERANGAN EVIDENT</label>
             <input type="text" class="form-control" name="ket_upload"  /><hr />
            
-            <input type="file" class="form-control" name="filedata" /><hr />
+            <input type="file" class="form-control" name="filedata"  id="filedata" /><hr />
             
             <button class="btn btn-primary mx-3" id="btnFetch" type="submit"  onclick="javascript=this.disabled = true; form.submit();">
             <i class="fas fa-spinner fa-spin" style="display:none;"></i>
@@ -110,7 +110,7 @@
                             <div class="col-12" width="100%">
                                 <div class="col-4"><?=$value->project_status?></div><hr />
                                 <div class="col-4"><?=$value->ket_upload?></div>
-                                <div class="col-4"><a target="_blank" href="<?=base_url("uploads/".$value->filedata)?>" >download</a> </div>
+                                <div class="col-4"><a target="_blank" href="<?="https://storage.cloud.google.com/ciptateknologimuda/uploads/".$value->filedata?>" >download</a> </div>
                             </div>
                         </li>
                         <?php
