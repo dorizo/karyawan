@@ -110,7 +110,7 @@
                             <div class="col-12" width="100%">
                                 <div class="col-4"><?=$value->project_status?></div><hr />
                                 <div class="col-4"><?=$value->ket_upload?></div>
-                                <div class="col-4"><a target="_blank" href="<?="https://storage.cloud.google.com/ciptateknologimuda/uploads/".$value->filedata?>" >download</a> </div>
+                                <div class="col-4"><a target="_blank" href="<?="https://storage.googleapis.com/ciptateknologimuda/uploads/".$value->filedata?>" >download</a> </div>
                             </div>
                         </li>
                         <?php
